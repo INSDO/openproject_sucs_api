@@ -1,0 +1,298 @@
+
+[2025-03-20 06:02:13.208696] STDOUT:
+Error al ejecutar la consulta: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+
+[2025-03-20 06:02:13.208717] STDERR:
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 552, in <module>
+    if connection:
+NameError: name 'connection' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 557, in <module>
+    if cursor:
+NameError: name 'cursor' is not defined
+
+
+[2025-03-21 06:02:14.223796] STDOUT:
+Error al ejecutar la consulta: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+
+[2025-03-21 06:02:14.223821] STDERR:
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 576, in <module>
+    if connection:
+NameError: name 'connection' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 581, in <module>
+    if cursor:
+NameError: name 'cursor' is not defined
+
+
+[2025-03-22 06:02:15.248250] STDOUT:
+Error al ejecutar la consulta: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+
+[2025-03-22 06:02:15.248263] STDERR:
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 609, in <module>
+    if connection:
+NameError: name 'connection' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 614, in <module>
+    if cursor:
+NameError: name 'cursor' is not defined
+
+
+[2025-03-23 06:02:16.271813] STDOUT:
+Error al ejecutar la consulta: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+
+[2025-03-23 06:02:16.271825] STDERR:
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 609, in <module>
+    if connection:
+NameError: name 'connection' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 614, in <module>
+    if cursor:
+NameError: name 'cursor' is not defined
+
+
+[2025-03-24 06:02:13.197399] STDOUT:
+Error al ejecutar la consulta: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+
+[2025-03-24 06:02:13.197417] STDERR:
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 609, in <module>
+    if connection:
+NameError: name 'connection' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 614, in <module>
+    if cursor:
+NameError: name 'cursor' is not defined
+
+
+[2025-03-25 06:00:44.951583] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-03-25 06:00:44.951597] STDERR:
+
+
+[2025-03-26 06:00:46.350679] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-03-26 06:00:46.350701] STDERR:
+
+
+[2025-03-27 06:00:43.265190] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-03-27 06:00:43.265204] STDERR:
+
+
+[2025-03-28 06:00:43.202887] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-03-28 06:00:43.202900] STDERR:
+
+
+[2025-03-29 15:17:36.540781] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-03-29 15:17:36.540803] STDERR:
+
+
+[2025-03-30 10:15:07.279839] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-03-30 10:15:07.279850] STDERR:
+
+
+[2025-03-31 09:17:36.688837] STDOUT:
+Error al ejecutar la consulta: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 597, in <module>
+    cursor.execute(query6)
+psycopg2.OperationalError: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+
+
+[2025-03-31 09:17:36.688851] STDERR:
+Traceback (most recent call last):
+  File "tasks/update.py", line 597, in <module>
+    cursor.execute(query6)
+psycopg2.OperationalError: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 610, in <module>
+    connection.rollback()
+psycopg2.InterfaceError: connection already closed
+
+
+[2025-03-31 11:27:01.595708] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-03-31 11:27:01.595724] STDERR:
+
+
+[2025-03-31 13:32:03.653274] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-03-31 13:32:03.653298] STDERR:
+
+
+[2025-03-31 13:34:14.049006] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-03-31 13:34:14.049019] STDERR:
+
+
+[2025-03-31 15:01:11.676603] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-03-31 15:01:11.676617] STDERR:
+
+
+[2025-04-01 06:01:11.452500] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-01 06:01:11.452515] STDERR:
+
+
+[2025-04-01 06:53:23.434964] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-01 06:53:23.434979] STDERR:
+
