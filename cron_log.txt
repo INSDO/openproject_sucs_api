@@ -296,3 +296,929 @@ Consulta ejecutada correctamente
 
 [2025-04-01 06:53:23.434979] STDERR:
 
+
+[2025-04-01 09:29:45.759311] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-01 09:29:45.759326] STDERR:
+
+
+[2025-04-01 15:01:13.050623] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-01 15:01:13.050639] STDERR:
+
+
+[2025-04-02 06:01:07.054543] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-02 06:01:07.054558] STDERR:
+
+
+[2025-04-02 15:01:13.116743] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-02 15:01:13.116757] STDERR:
+
+
+[2025-04-03 06:01:14.729224] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-03 06:01:14.729240] STDERR:
+
+
+[2025-04-03 15:11:14.088216] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-03 15:11:14.088236] STDERR:
+
+
+[2025-04-04 06:10:46.343643] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-04 06:10:46.343657] STDERR:
+
+
+[2025-04-04 15:24:51.292547] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-04 15:24:51.292570] STDERR:
+
+
+[2025-04-05 06:20:58.227939] STDOUT:
+Error al ejecutar la consulta: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 605, in <module>
+    cursor.execute(query7)
+psycopg2.OperationalError: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+
+
+[2025-04-05 06:20:58.227954] STDERR:
+Traceback (most recent call last):
+  File "tasks/update.py", line 605, in <module>
+    cursor.execute(query7)
+psycopg2.OperationalError: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 617, in <module>
+    connection.rollback()
+psycopg2.InterfaceError: connection already closed
+
+
+[2025-04-05 15:25:40.185381] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-05 15:25:40.185412] STDERR:
+
+
+[2025-04-06 06:27:36.492133] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-06 06:27:36.492157] STDERR:
+
+
+[2025-04-06 15:11:54.501504] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-06 15:11:54.501520] STDERR:
+
+
+[2025-04-07 06:25:41.220592] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-07 06:25:41.220617] STDERR:
+
+
+[2025-04-07 15:12:19.854201] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-07 15:12:19.854217] STDERR:
+
+
+[2025-04-08 06:11:01.511706] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-08 06:11:01.511720] STDERR:
+
+
+[2025-04-08 15:14:52.583533] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-08 15:14:52.583550] STDERR:
+
+
+[2025-04-09 06:14:00.464342] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-09 06:14:00.464360] STDERR:
+
+
+[2025-04-09 15:02:51.408899] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-09 15:02:51.408916] STDERR:
+
+
+[2025-04-10 06:04:05.503306] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-10 06:04:05.503331] STDERR:
+
+
+[2025-04-10 15:02:17.030883] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-10 15:02:17.030904] STDERR:
+
+
+[2025-04-11 06:02:01.783478] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-11 06:02:01.783500] STDERR:
+
+
+[2025-04-11 15:04:01.647343] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-11 15:04:01.647366] STDERR:
+
+
+[2025-04-12 06:04:06.799905] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-12 06:04:06.799928] STDERR:
+
+
+[2025-04-12 15:04:07.914690] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-12 15:04:07.914711] STDERR:
+
+
+[2025-04-13 06:03:58.400798] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-13 06:03:58.400829] STDERR:
+
+
+[2025-04-13 15:04:05.348376] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-13 15:04:05.348398] STDERR:
+
+
+[2025-04-14 06:04:07.932091] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-14 06:04:07.932114] STDERR:
+
+
+[2025-04-14 15:03:59.455936] STDOUT:
+Error al ejecutar la consulta: relation "temp.posibleanulacion" does not exist
+LINE 12:             JOIN temp.posibleanulacion es ON cv.value = es.e...
+                          ^
+QUERY:  WITH custom_field_info AS (
+            SELECT id
+            FROM public.custom_fields
+            WHERE "name" = 'FECHA POSIBLE ANULACIÓN'
+        ),
+        estado_dias AS (
+            SELECT
+                cv.customized_id,
+                cv.value AS estado_value,
+                es.diasum
+            FROM public.custom_values cv
+            JOIN temp.posibleanulacion es ON cv.value = es.estado
+            WHERE cv.custom_field_id = 62
+            AND cv.customized_id = NEW.customized_id
+        ),
+        custom_field_to_update AS (
+            SELECT
+                ed.customized_id,
+                cfc.id AS custom_field_id_to_update,
+                ed.estado_value
+            FROM estado_dias ed
+            JOIN public.custom_fields cfc ON cfc.name = ed.estado_value
+        ),
+        fechas_calculadas AS (
+            SELECT
+                cfu.customized_id,
+                cfu.custom_field_id_to_update,
+                TO_CHAR(
+                    CAST(cv_base.value AS DATE) + CAST(ed.diasum AS INTEGER), 'YYYY-MM-DD'
+                ) AS nueva_fecha
+            FROM custom_field_to_update cfu
+            JOIN estado_dias ed ON ed.customized_id = cfu.customized_id
+            JOIN public.custom_values cv_base 
+                ON cv_base.customized_id = cfu.customized_id
+                AND cv_base.custom_field_id = cfu.custom_field_id_to_update
+        )
+        UPDATE public.custom_values cv
+        SET value = fc.nueva_fecha
+        FROM fechas_calculadas fc
+        WHERE cv.customized_id = fc.customized_id
+          AND cv.custom_field_id = (SELECT id FROM custom_field_info)
+          AND cv.customized_id = NEW.customized_id
+CONTEXT:  PL/pgSQL function actualizar_fecha_posible_anulacion() line 6 at SQL statement
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 620, in <module>
+    cursor.execute(query7)
+psycopg2.errors.UndefinedTable: relation "temp.posibleanulacion" does not exist
+LINE 12:             JOIN temp.posibleanulacion es ON cv.value = es.e...
+                          ^
+QUERY:  WITH custom_field_info AS (
+            SELECT id
+            FROM public.custom_fields
+            WHERE "name" = 'FECHA POSIBLE ANULACIÓN'
+        ),
+        estado_dias AS (
+            SELECT
+                cv.customized_id,
+                cv.value AS estado_value,
+                es.diasum
+            FROM public.custom_values cv
+            JOIN temp.posibleanulacion es ON cv.value = es.estado
+            WHERE cv.custom_field_id = 62
+            AND cv.customized_id = NEW.customized_id
+        ),
+        custom_field_to_update AS (
+            SELECT
+                ed.customized_id,
+                cfc.id AS custom_field_id_to_update,
+                ed.estado_value
+            FROM estado_dias ed
+            JOIN public.custom_fields cfc ON cfc.name = ed.estado_value
+        ),
+        fechas_calculadas AS (
+            SELECT
+                cfu.customized_id,
+                cfu.custom_field_id_to_update,
+                TO_CHAR(
+                    CAST(cv_base.value AS DATE) + CAST(ed.diasum AS INTEGER), 'YYYY-MM-DD'
+                ) AS nueva_fecha
+            FROM custom_field_to_update cfu
+            JOIN estado_dias ed ON ed.customized_id = cfu.customized_id
+            JOIN public.custom_values cv_base 
+                ON cv_base.customized_id = cfu.customized_id
+                AND cv_base.custom_field_id = cfu.custom_field_id_to_update
+        )
+        UPDATE public.custom_values cv
+        SET value = fc.nueva_fecha
+        FROM fechas_calculadas fc
+        WHERE cv.customized_id = fc.customized_id
+          AND cv.custom_field_id = (SELECT id FROM custom_field_info)
+          AND cv.customized_id = NEW.customized_id
+CONTEXT:  PL/pgSQL function actualizar_fecha_posible_anulacion() line 6 at SQL statement
+
+
+
+[2025-04-14 15:03:59.455985] STDERR:
+
+
+[2025-04-15 06:04:12.359632] STDOUT:
+Error al ejecutar la consulta: relation "temp.posibleanulacion" does not exist
+LINE 12:             JOIN temp.posibleanulacion es ON cv.value = es.e...
+                          ^
+QUERY:  WITH custom_field_info AS (
+            SELECT id
+            FROM public.custom_fields
+            WHERE "name" = 'FECHA POSIBLE ANULACIÓN'
+        ),
+        estado_dias AS (
+            SELECT
+                cv.customized_id,
+                cv.value AS estado_value,
+                es.diasum
+            FROM public.custom_values cv
+            JOIN temp.posibleanulacion es ON cv.value = es.estado
+            WHERE cv.custom_field_id = 62
+            AND cv.customized_id = NEW.customized_id
+        ),
+        custom_field_to_update AS (
+            SELECT
+                ed.customized_id,
+                cfc.id AS custom_field_id_to_update,
+                ed.estado_value
+            FROM estado_dias ed
+            JOIN public.custom_fields cfc ON cfc.name = ed.estado_value
+        ),
+        fechas_calculadas AS (
+            SELECT
+                cfu.customized_id,
+                cfu.custom_field_id_to_update,
+                TO_CHAR(
+                    CAST(cv_base.value AS DATE) + CAST(ed.diasum AS INTEGER), 'YYYY-MM-DD'
+                ) AS nueva_fecha
+            FROM custom_field_to_update cfu
+            JOIN estado_dias ed ON ed.customized_id = cfu.customized_id
+            JOIN public.custom_values cv_base 
+                ON cv_base.customized_id = cfu.customized_id
+                AND cv_base.custom_field_id = cfu.custom_field_id_to_update
+        )
+        UPDATE public.custom_values cv
+        SET value = fc.nueva_fecha
+        FROM fechas_calculadas fc
+        WHERE cv.customized_id = fc.customized_id
+          AND cv.custom_field_id = (SELECT id FROM custom_field_info)
+          AND cv.customized_id = NEW.customized_id
+CONTEXT:  PL/pgSQL function actualizar_fecha_posible_anulacion() line 6 at SQL statement
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 620, in <module>
+    cursor.execute(query7)
+psycopg2.errors.UndefinedTable: relation "temp.posibleanulacion" does not exist
+LINE 12:             JOIN temp.posibleanulacion es ON cv.value = es.e...
+                          ^
+QUERY:  WITH custom_field_info AS (
+            SELECT id
+            FROM public.custom_fields
+            WHERE "name" = 'FECHA POSIBLE ANULACIÓN'
+        ),
+        estado_dias AS (
+            SELECT
+                cv.customized_id,
+                cv.value AS estado_value,
+                es.diasum
+            FROM public.custom_values cv
+            JOIN temp.posibleanulacion es ON cv.value = es.estado
+            WHERE cv.custom_field_id = 62
+            AND cv.customized_id = NEW.customized_id
+        ),
+        custom_field_to_update AS (
+            SELECT
+                ed.customized_id,
+                cfc.id AS custom_field_id_to_update,
+                ed.estado_value
+            FROM estado_dias ed
+            JOIN public.custom_fields cfc ON cfc.name = ed.estado_value
+        ),
+        fechas_calculadas AS (
+            SELECT
+                cfu.customized_id,
+                cfu.custom_field_id_to_update,
+                TO_CHAR(
+                    CAST(cv_base.value AS DATE) + CAST(ed.diasum AS INTEGER), 'YYYY-MM-DD'
+                ) AS nueva_fecha
+            FROM custom_field_to_update cfu
+            JOIN estado_dias ed ON ed.customized_id = cfu.customized_id
+            JOIN public.custom_values cv_base 
+                ON cv_base.customized_id = cfu.customized_id
+                AND cv_base.custom_field_id = cfu.custom_field_id_to_update
+        )
+        UPDATE public.custom_values cv
+        SET value = fc.nueva_fecha
+        FROM fechas_calculadas fc
+        WHERE cv.customized_id = fc.customized_id
+          AND cv.custom_field_id = (SELECT id FROM custom_field_info)
+          AND cv.customized_id = NEW.customized_id
+CONTEXT:  PL/pgSQL function actualizar_fecha_posible_anulacion() line 6 at SQL statement
+
+
+
+[2025-04-15 06:04:12.359696] STDERR:
+
+
+[2025-04-15 11:58:06.457419] STDOUT:
+Error al ejecutar la consulta: relation "temp.posibleanulacion" does not exist
+LINE 12:             JOIN temp.posibleanulacion es ON cv.value = es.e...
+                          ^
+QUERY:  WITH custom_field_info AS (
+            SELECT id
+            FROM public.custom_fields
+            WHERE "name" = 'FECHA POSIBLE ANULACIÓN'
+        ),
+        estado_dias AS (
+            SELECT
+                cv.customized_id,
+                cv.value AS estado_value,
+                es.diasum
+            FROM public.custom_values cv
+            JOIN temp.posibleanulacion es ON cv.value = es.estado
+            WHERE cv.custom_field_id = 62
+            AND cv.customized_id = NEW.customized_id
+        ),
+        custom_field_to_update AS (
+            SELECT
+                ed.customized_id,
+                cfc.id AS custom_field_id_to_update,
+                ed.estado_value
+            FROM estado_dias ed
+            JOIN public.custom_fields cfc ON cfc.name = ed.estado_value
+        ),
+        fechas_calculadas AS (
+            SELECT
+                cfu.customized_id,
+                cfu.custom_field_id_to_update,
+                TO_CHAR(
+                    CAST(cv_base.value AS DATE) + CAST(ed.diasum AS INTEGER), 'YYYY-MM-DD'
+                ) AS nueva_fecha
+            FROM custom_field_to_update cfu
+            JOIN estado_dias ed ON ed.customized_id = cfu.customized_id
+            JOIN public.custom_values cv_base 
+                ON cv_base.customized_id = cfu.customized_id
+                AND cv_base.custom_field_id = cfu.custom_field_id_to_update
+        )
+        UPDATE public.custom_values cv
+        SET value = fc.nueva_fecha
+        FROM fechas_calculadas fc
+        WHERE cv.customized_id = fc.customized_id
+          AND cv.custom_field_id = (SELECT id FROM custom_field_info)
+          AND cv.customized_id = NEW.customized_id
+CONTEXT:  PL/pgSQL function actualizar_fecha_posible_anulacion() line 6 at SQL statement
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 620, in <module>
+    cursor.execute(query7)
+psycopg2.errors.UndefinedTable: relation "temp.posibleanulacion" does not exist
+LINE 12:             JOIN temp.posibleanulacion es ON cv.value = es.e...
+                          ^
+QUERY:  WITH custom_field_info AS (
+            SELECT id
+            FROM public.custom_fields
+            WHERE "name" = 'FECHA POSIBLE ANULACIÓN'
+        ),
+        estado_dias AS (
+            SELECT
+                cv.customized_id,
+                cv.value AS estado_value,
+                es.diasum
+            FROM public.custom_values cv
+            JOIN temp.posibleanulacion es ON cv.value = es.estado
+            WHERE cv.custom_field_id = 62
+            AND cv.customized_id = NEW.customized_id
+        ),
+        custom_field_to_update AS (
+            SELECT
+                ed.customized_id,
+                cfc.id AS custom_field_id_to_update,
+                ed.estado_value
+            FROM estado_dias ed
+            JOIN public.custom_fields cfc ON cfc.name = ed.estado_value
+        ),
+        fechas_calculadas AS (
+            SELECT
+                cfu.customized_id,
+                cfu.custom_field_id_to_update,
+                TO_CHAR(
+                    CAST(cv_base.value AS DATE) + CAST(ed.diasum AS INTEGER), 'YYYY-MM-DD'
+                ) AS nueva_fecha
+            FROM custom_field_to_update cfu
+            JOIN estado_dias ed ON ed.customized_id = cfu.customized_id
+            JOIN public.custom_values cv_base 
+                ON cv_base.customized_id = cfu.customized_id
+                AND cv_base.custom_field_id = cfu.custom_field_id_to_update
+        )
+        UPDATE public.custom_values cv
+        SET value = fc.nueva_fecha
+        FROM fechas_calculadas fc
+        WHERE cv.customized_id = fc.customized_id
+          AND cv.custom_field_id = (SELECT id FROM custom_field_info)
+          AND cv.customized_id = NEW.customized_id
+CONTEXT:  PL/pgSQL function actualizar_fecha_posible_anulacion() line 6 at SQL statement
+
+
+
+[2025-04-15 11:58:06.457438] STDERR:
+
+
+[2025-04-15 15:04:13.196777] STDOUT:
+Error al ejecutar la consulta: relation "temp.posibleanulacion" does not exist
+LINE 12:             JOIN temp.posibleanulacion es ON cv.value = es.e...
+                          ^
+QUERY:  WITH custom_field_info AS (
+            SELECT id
+            FROM public.custom_fields
+            WHERE "name" = 'FECHA POSIBLE ANULACIÓN'
+        ),
+        estado_dias AS (
+            SELECT
+                cv.customized_id,
+                cv.value AS estado_value,
+                es.diasum
+            FROM public.custom_values cv
+            JOIN temp.posibleanulacion es ON cv.value = es.estado
+            WHERE cv.custom_field_id = 62
+            AND cv.customized_id = NEW.customized_id
+        ),
+        custom_field_to_update AS (
+            SELECT
+                ed.customized_id,
+                cfc.id AS custom_field_id_to_update,
+                ed.estado_value
+            FROM estado_dias ed
+            JOIN public.custom_fields cfc ON cfc.name = ed.estado_value
+        ),
+        fechas_calculadas AS (
+            SELECT
+                cfu.customized_id,
+                cfu.custom_field_id_to_update,
+                TO_CHAR(
+                    CAST(cv_base.value AS DATE) + CAST(ed.diasum AS INTEGER), 'YYYY-MM-DD'
+                ) AS nueva_fecha
+            FROM custom_field_to_update cfu
+            JOIN estado_dias ed ON ed.customized_id = cfu.customized_id
+            JOIN public.custom_values cv_base 
+                ON cv_base.customized_id = cfu.customized_id
+                AND cv_base.custom_field_id = cfu.custom_field_id_to_update
+        )
+        UPDATE public.custom_values cv
+        SET value = fc.nueva_fecha
+        FROM fechas_calculadas fc
+        WHERE cv.customized_id = fc.customized_id
+          AND cv.custom_field_id = (SELECT id FROM custom_field_info)
+          AND cv.customized_id = NEW.customized_id
+CONTEXT:  PL/pgSQL function actualizar_fecha_posible_anulacion() line 6 at SQL statement
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 620, in <module>
+    cursor.execute(query7)
+psycopg2.errors.UndefinedTable: relation "temp.posibleanulacion" does not exist
+LINE 12:             JOIN temp.posibleanulacion es ON cv.value = es.e...
+                          ^
+QUERY:  WITH custom_field_info AS (
+            SELECT id
+            FROM public.custom_fields
+            WHERE "name" = 'FECHA POSIBLE ANULACIÓN'
+        ),
+        estado_dias AS (
+            SELECT
+                cv.customized_id,
+                cv.value AS estado_value,
+                es.diasum
+            FROM public.custom_values cv
+            JOIN temp.posibleanulacion es ON cv.value = es.estado
+            WHERE cv.custom_field_id = 62
+            AND cv.customized_id = NEW.customized_id
+        ),
+        custom_field_to_update AS (
+            SELECT
+                ed.customized_id,
+                cfc.id AS custom_field_id_to_update,
+                ed.estado_value
+            FROM estado_dias ed
+            JOIN public.custom_fields cfc ON cfc.name = ed.estado_value
+        ),
+        fechas_calculadas AS (
+            SELECT
+                cfu.customized_id,
+                cfu.custom_field_id_to_update,
+                TO_CHAR(
+                    CAST(cv_base.value AS DATE) + CAST(ed.diasum AS INTEGER), 'YYYY-MM-DD'
+                ) AS nueva_fecha
+            FROM custom_field_to_update cfu
+            JOIN estado_dias ed ON ed.customized_id = cfu.customized_id
+            JOIN public.custom_values cv_base 
+                ON cv_base.customized_id = cfu.customized_id
+                AND cv_base.custom_field_id = cfu.custom_field_id_to_update
+        )
+        UPDATE public.custom_values cv
+        SET value = fc.nueva_fecha
+        FROM fechas_calculadas fc
+        WHERE cv.customized_id = fc.customized_id
+          AND cv.custom_field_id = (SELECT id FROM custom_field_info)
+          AND cv.customized_id = NEW.customized_id
+CONTEXT:  PL/pgSQL function actualizar_fecha_posible_anulacion() line 6 at SQL statement
+
+
+
+[2025-04-15 15:04:13.196814] STDERR:
+
+
+[2025-04-16 06:04:04.956958] STDOUT:
+Error al ejecutar la consulta: relation "temp.posibleanulacion" does not exist
+LINE 12:             JOIN temp.posibleanulacion es ON cv.value = es.e...
+                          ^
+QUERY:  WITH custom_field_info AS (
+            SELECT id
+            FROM public.custom_fields
+            WHERE "name" = 'FECHA POSIBLE ANULACIÓN'
+        ),
+        estado_dias AS (
+            SELECT
+                cv.customized_id,
+                cv.value AS estado_value,
+                es.diasum
+            FROM public.custom_values cv
+            JOIN temp.posibleanulacion es ON cv.value = es.estado
+            WHERE cv.custom_field_id = 62
+            AND cv.customized_id = NEW.customized_id
+        ),
+        custom_field_to_update AS (
+            SELECT
+                ed.customized_id,
+                cfc.id AS custom_field_id_to_update,
+                ed.estado_value
+            FROM estado_dias ed
+            JOIN public.custom_fields cfc ON cfc.name = ed.estado_value
+        ),
+        fechas_calculadas AS (
+            SELECT
+                cfu.customized_id,
+                cfu.custom_field_id_to_update,
+                TO_CHAR(
+                    CAST(cv_base.value AS DATE) + CAST(ed.diasum AS INTEGER), 'YYYY-MM-DD'
+                ) AS nueva_fecha
+            FROM custom_field_to_update cfu
+            JOIN estado_dias ed ON ed.customized_id = cfu.customized_id
+            JOIN public.custom_values cv_base 
+                ON cv_base.customized_id = cfu.customized_id
+                AND cv_base.custom_field_id = cfu.custom_field_id_to_update
+        )
+        UPDATE public.custom_values cv
+        SET value = fc.nueva_fecha
+        FROM fechas_calculadas fc
+        WHERE cv.customized_id = fc.customized_id
+          AND cv.custom_field_id = (SELECT id FROM custom_field_info)
+          AND cv.customized_id = NEW.customized_id
+CONTEXT:  PL/pgSQL function actualizar_fecha_posible_anulacion() line 6 at SQL statement
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 620, in <module>
+    cursor.execute(query7)
+psycopg2.errors.UndefinedTable: relation "temp.posibleanulacion" does not exist
+LINE 12:             JOIN temp.posibleanulacion es ON cv.value = es.e...
+                          ^
+QUERY:  WITH custom_field_info AS (
+            SELECT id
+            FROM public.custom_fields
+            WHERE "name" = 'FECHA POSIBLE ANULACIÓN'
+        ),
+        estado_dias AS (
+            SELECT
+                cv.customized_id,
+                cv.value AS estado_value,
+                es.diasum
+            FROM public.custom_values cv
+            JOIN temp.posibleanulacion es ON cv.value = es.estado
+            WHERE cv.custom_field_id = 62
+            AND cv.customized_id = NEW.customized_id
+        ),
+        custom_field_to_update AS (
+            SELECT
+                ed.customized_id,
+                cfc.id AS custom_field_id_to_update,
+                ed.estado_value
+            FROM estado_dias ed
+            JOIN public.custom_fields cfc ON cfc.name = ed.estado_value
+        ),
+        fechas_calculadas AS (
+            SELECT
+                cfu.customized_id,
+                cfu.custom_field_id_to_update,
+                TO_CHAR(
+                    CAST(cv_base.value AS DATE) + CAST(ed.diasum AS INTEGER), 'YYYY-MM-DD'
+                ) AS nueva_fecha
+            FROM custom_field_to_update cfu
+            JOIN estado_dias ed ON ed.customized_id = cfu.customized_id
+            JOIN public.custom_values cv_base 
+                ON cv_base.customized_id = cfu.customized_id
+                AND cv_base.custom_field_id = cfu.custom_field_id_to_update
+        )
+        UPDATE public.custom_values cv
+        SET value = fc.nueva_fecha
+        FROM fechas_calculadas fc
+        WHERE cv.customized_id = fc.customized_id
+          AND cv.custom_field_id = (SELECT id FROM custom_field_info)
+          AND cv.customized_id = NEW.customized_id
+CONTEXT:  PL/pgSQL function actualizar_fecha_posible_anulacion() line 6 at SQL statement
+
+
+
+[2025-04-16 06:04:04.956987] STDERR:
+
+
+[2025-04-16 09:42:09.729485] STDOUT:
+Error al ejecutar la consulta: relation "temp.posibleanulacion" does not exist
+LINE 12:             JOIN temp.posibleanulacion es ON cv.value = es.e...
+                          ^
+QUERY:  WITH custom_field_info AS (
+            SELECT id
+            FROM public.custom_fields
+            WHERE "name" = 'FECHA POSIBLE ANULACIÓN'
+        ),
+        estado_dias AS (
+            SELECT
+                cv.customized_id,
+                cv.value AS estado_value,
+                es.diasum
+            FROM public.custom_values cv
+            JOIN temp.posibleanulacion es ON cv.value = es.estado
+            WHERE cv.custom_field_id = 62
+            AND cv.customized_id = NEW.customized_id
+        ),
+        custom_field_to_update AS (
+            SELECT
+                ed.customized_id,
+                cfc.id AS custom_field_id_to_update,
+                ed.estado_value
+            FROM estado_dias ed
+            JOIN public.custom_fields cfc ON cfc.name = ed.estado_value
+        ),
+        fechas_calculadas AS (
+            SELECT
+                cfu.customized_id,
+                cfu.custom_field_id_to_update,
+                TO_CHAR(
+                    CAST(cv_base.value AS DATE) + CAST(ed.diasum AS INTEGER), 'YYYY-MM-DD'
+                ) AS nueva_fecha
+            FROM custom_field_to_update cfu
+            JOIN estado_dias ed ON ed.customized_id = cfu.customized_id
+            JOIN public.custom_values cv_base 
+                ON cv_base.customized_id = cfu.customized_id
+                AND cv_base.custom_field_id = cfu.custom_field_id_to_update
+        )
+        UPDATE public.custom_values cv
+        SET value = fc.nueva_fecha
+        FROM fechas_calculadas fc
+        WHERE cv.customized_id = fc.customized_id
+          AND cv.custom_field_id = (SELECT id FROM custom_field_info)
+          AND cv.customized_id = NEW.customized_id
+CONTEXT:  PL/pgSQL function actualizar_fecha_posible_anulacion() line 6 at SQL statement
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 620, in <module>
+    cursor.execute(query7)
+psycopg2.errors.UndefinedTable: relation "temp.posibleanulacion" does not exist
+LINE 12:             JOIN temp.posibleanulacion es ON cv.value = es.e...
+                          ^
+QUERY:  WITH custom_field_info AS (
+            SELECT id
+            FROM public.custom_fields
+            WHERE "name" = 'FECHA POSIBLE ANULACIÓN'
+        ),
+        estado_dias AS (
+            SELECT
+                cv.customized_id,
+                cv.value AS estado_value,
+                es.diasum
+            FROM public.custom_values cv
+            JOIN temp.posibleanulacion es ON cv.value = es.estado
+            WHERE cv.custom_field_id = 62
+            AND cv.customized_id = NEW.customized_id
+        ),
+        custom_field_to_update AS (
+            SELECT
+                ed.customized_id,
+                cfc.id AS custom_field_id_to_update,
+                ed.estado_value
+            FROM estado_dias ed
+            JOIN public.custom_fields cfc ON cfc.name = ed.estado_value
+        ),
+        fechas_calculadas AS (
+            SELECT
+                cfu.customized_id,
+                cfu.custom_field_id_to_update,
+                TO_CHAR(
+                    CAST(cv_base.value AS DATE) + CAST(ed.diasum AS INTEGER), 'YYYY-MM-DD'
+                ) AS nueva_fecha
+            FROM custom_field_to_update cfu
+            JOIN estado_dias ed ON ed.customized_id = cfu.customized_id
+            JOIN public.custom_values cv_base 
+                ON cv_base.customized_id = cfu.customized_id
+                AND cv_base.custom_field_id = cfu.custom_field_id_to_update
+        )
+        UPDATE public.custom_values cv
+        SET value = fc.nueva_fecha
+        FROM fechas_calculadas fc
+        WHERE cv.customized_id = fc.customized_id
+          AND cv.custom_field_id = (SELECT id FROM custom_field_info)
+          AND cv.customized_id = NEW.customized_id
+CONTEXT:  PL/pgSQL function actualizar_fecha_posible_anulacion() line 6 at SQL statement
+
+
+
+[2025-04-16 09:42:09.729516] STDERR:
+
+
+[2025-04-16 10:52:40.115941] STDOUT:
+Error al ejecutar la consulta: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 615, in <module>
+    cursor.execute(query2)
+psycopg2.OperationalError: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+
+
+[2025-04-16 10:52:40.115959] STDERR:
+Traceback (most recent call last):
+  File "tasks/update.py", line 615, in <module>
+    cursor.execute(query2)
+psycopg2.OperationalError: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 632, in <module>
+    connection.rollback()
+psycopg2.InterfaceError: connection already closed
+
+
+[2025-04-16 11:11:29.592549] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-16 11:11:29.592567] STDERR:
+
+
+[2025-04-16 15:02:55.772756] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-16 15:02:55.772779] STDERR:
+
+
+[2025-04-17 06:04:06.704079] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-17 06:04:06.704105] STDERR:
+
+
+[2025-04-17 15:02:09.342918] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-17 15:02:09.342933] STDERR:
+
+
+[2025-04-18 06:04:04.527584] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-18 06:04:04.527657] STDERR:
+
+
+[2025-04-18 15:04:12.331151] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-18 15:04:12.331177] STDERR:
+
+
+[2025-04-19 06:04:08.047667] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-19 06:04:08.047697] STDERR:
+
+
+[2025-04-19 15:04:02.585877] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-19 15:04:02.585909] STDERR:
+
+
+[2025-04-20 06:02:04.510022] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-20 06:02:04.510042] STDERR:
+
+
+[2025-04-20 15:02:03.966602] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-20 15:02:03.966624] STDERR:
+
+
+[2025-04-21 06:01:51.657612] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-21 06:01:51.657631] STDERR:
+
+
+[2025-04-21 15:03:58.694548] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-21 15:03:58.694571] STDERR:
+
+
+[2025-04-22 06:03:51.995043] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-22 06:03:51.995075] STDERR:
+
+
+[2025-04-22 15:04:00.881366] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-22 15:04:00.881400] STDERR:
+
+
+[2025-04-23 06:04:02.659890] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-23 06:04:02.659913] STDERR:
+

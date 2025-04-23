@@ -88,36 +88,51 @@ WHERE NOT EXISTS (
     """
 
     query3 = """
-    WITH datos AS (
         WITH escapex_data AS (
         SELECT num_suc, cleaned_historial_estados_json
         FROM dblink(
-            'host=suc.insdosl.com port=5001 dbname=PRO user=insdo_backup password=1nSd0%24', 
+            'host=suc.insdosl.com port=5001 dbname=PRO user=insdo_backup password=1nSd0%24',
             'SELECT num_suc, cleaned_historial_estados_json FROM escapex.sucsestados_view WHERE num_suc LIKE ''907%'' ORDER BY num_suc ASC'
         ) AS se(num_suc TEXT, cleaned_historial_estados_json JSONB)
-        )
-        SELECT 
-            wp.id AS work_package_id, 
-            (jsonb_array_elements(se.cleaned_historial_estados_json::jsonb)->>'estado') AS estado, 
-            TO_CHAR((jsonb_array_elements(se.cleaned_historial_estados_json::jsonb)->>'fecha')::timestamp,'YYYY-MM-DD') AS fecha
-        FROM 
-            public.work_packages wp
-        JOIN escapex_data se ON wp.subject = se.num_suc
-    ),
-    actualizar AS (
-        SELECT 
-            cv.id AS custom_value_id,
-            d.fecha
-        FROM custom_values cv
-        INNER JOIN datos d 
-            ON cv.customized_id = d.work_package_id
-        INNER JOIN custom_fields cf 
-            ON cf.id = cv.custom_field_id AND cf.name = d.estado
-    )
-    UPDATE custom_values cv
-    SET value = actualizar.fecha
-    FROM actualizar
-    WHERE cv.id = actualizar.custom_value_id;
+       	),
+		exploded_data AS (
+    SELECT
+        wp.id AS work_package_id,
+        estado_fecha.estado,
+        TO_CHAR(estado_fecha.fecha, 'YYYY-MM-DD') AS fecha,
+        ROW_NUMBER() OVER (
+            PARTITION BY wp.id, estado_fecha.estado
+            ORDER BY estado_fecha.fecha DESC
+        ) AS rn
+    FROM
+        public.work_packages wp
+    JOIN escapex_data se ON wp.subject = se.num_suc,
+        LATERAL (
+            SELECT
+                (value->>'estado') AS estado,
+                (value->>'fecha')::timestamp AS fecha
+            FROM jsonb_array_elements(se.cleaned_historial_estados_json::jsonb) AS value
+        ) AS estado_fecha
+),
+datos_filtrados AS (
+    SELECT work_package_id, estado, fecha
+    FROM exploded_data
+    WHERE rn = 1  -- Solo nos quedamos con la entrada más reciente por estado
+),
+actualizar AS (
+    SELECT
+        cv.id AS custom_value_id,
+        df.fecha
+    FROM custom_values cv
+    INNER JOIN datos_filtrados df
+        ON cv.customized_id = df.work_package_id
+    INNER JOIN custom_fields cf
+        ON cf.id = cv.custom_field_id AND cf.name = df.estado
+)
+UPDATE custom_values cv
+SET value = actualizar.fecha
+FROM actualizar
+WHERE cv.id = actualizar.custom_value_id;
     """
 
     query4 = """
@@ -246,6 +261,13 @@ WHERE NOT EXISTS (
                 SELECT CAST(num_suc AS TEXT) AS num_suc, ''COSTE SUSTITUCION'' AS estado, CAST(sm.coste_postes AS TEXT) AS fecha
                 FROM escapex."SucMarco" sm
                 WHERE id_operador = 1
+
+		UNION ALL
+
+			SELECT CAST(num_suc AS TEXT) AS num_suc, ''REPLANTEO CONJUNTO'' AS estado, CAST(sm.fecha_replanteo AS TEXT) AS fecha
+            FROM escapex."SucMarco" sm
+            WHERE id_operador = 1
+
 
 		UNION ALL
 
@@ -413,6 +435,12 @@ WHERE sm.id_operador = 1
                 SELECT CAST(num_suc AS TEXT) AS num_suc, ''COSTE SUSTITUCION'' AS estado, CAST(sm.coste_postes AS TEXT) AS fecha
                 FROM escapex."SucMarco" sm
                 WHERE id_operador = 1
+
+		UNION ALL
+
+                        SELECT CAST(num_suc AS TEXT) AS num_suc, ''REPLANTEO CONJUNTO'' AS estado, CAST(sm.fecha_replanteo AS TEXT) AS fecha
+            FROM escapex."SucMarco" sm
+            WHERE id_operador = 1
 
                 UNION ALL
 
