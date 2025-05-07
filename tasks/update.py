@@ -35,7 +35,7 @@ try:
         44,
         s.num_suc, 
         '', 
-        1, 
+        18, 
         8, 
         4, 
         2, 
@@ -326,6 +326,18 @@ WHERE sm.id_operador = 1
 
                 UNION ALL
 
+                SELECT CAST(num_suc AS TEXT) AS num_suc, ''INICIO EJECUCION'' AS estado, CAST(sm.trabajos_provision_fecha_inicio AS TEXT) AS fecha
+                FROM escapex."SucMarco" sm
+                WHERE id_operador = 1
+
+                UNION ALL
+
+                SELECT CAST(num_suc AS TEXT) AS num_suc, ''LIMITE EJECUCION'' AS estado, CAST(sm.trabajos_provision_fecha_fin AS TEXT) AS fecha
+                FROM escapex."SucMarco" sm
+                WHERE id_operador = 1
+
+                UNION ALL
+
                 SELECT CAST(num_suc AS TEXT) AS num_suc, ''ESTADO ACTUAL NEON'' AS estado, CAST(sm.estado AS TEXT) AS fecha
                 FROM escapex."SucMarco" sm
                 WHERE id_operador = 1
@@ -514,6 +526,18 @@ WHERE sm.id_operador = 1
 
                 UNION ALL
 
+                SELECT CAST(num_suc AS TEXT) AS num_suc, ''INICIO EJECUCION'' AS estado, CAST(sm.trabajos_provision_fecha_inicio AS TEXT) AS fecha
+                FROM escapex."SucMarco" sm
+                WHERE id_operador = 1
+
+                UNION ALL
+
+                SELECT CAST(num_suc AS TEXT) AS num_suc, ''LIMITE EJECUCION'' AS estado, CAST(sm.trabajos_provision_fecha_fin AS TEXT) AS fecha
+                FROM escapex."SucMarco" sm
+                WHERE id_operador = 1
+
+                UNION ALL
+
                 SELECT CAST(num_suc AS TEXT) AS num_suc, ''F. INICIO OBRA'' AS estado, CAST(sm.fecha_inicio_obras AS TEXT) AS fecha
                 FROM escapex."SucMarco" sm
                 WHERE id_operador = 1
@@ -603,12 +627,221 @@ WHERE sm.id_operador = 1
 
     query9 = """
     UPDATE public.custom_values
-    SET value = REPLACE(REPLACE(value, 'SI', 't'), 'NO', 'f')
+    SET value = REPLACE(REPLACE(value, 'SI', '33'), 'NO', '34')
     WHERE value IN ('SI', 'NO') 
-    AND custom_field_id = 59;
+    AND custom_field_id = 131;
     """
+    query10 = """
+WITH datos AS (
+        SELECT wp.id AS work_package_id, sm.estado, sm.fecha
+        FROM
+        dblink(
+            'host=suc.insdosl.com port=5001 dbname=PRO user=insdo_backup password=1nSd0%24',
+            '
+                WITH datos AS (
+                    SELECT 
+  num_suc, 
+  sm.miga, 
+  estado,  
 
+  COUNT(*) FILTER (
+    WHERE 
+      (sme.tipo_registro ILIKE ''%CR%'' OR 
+       (sme.tipo_registro ILIKE ''OTROS'' AND sme.observaciones LIKE ''%CR%'')) 
+      AND uso <> ''0''
+  ) AS num_CR,
 
+  COUNT(*) FILTER (
+    WHERE 
+      (sme.tipo_registro ILIKE ''%CR%'' OR 
+       (sme.tipo_registro ILIKE ''OTROS'' AND sme.observaciones LIKE ''%CR%'')) 
+      AND uso = ''0''
+  ) AS num_CR0,
+
+  COUNT(*) FILTER (
+    WHERE 
+      sme.tipo_registro ILIKE ''%Arq%'' OR 
+      (sme.tipo_registro ILIKE ''OTROS'' AND sme.observaciones NOT LIKE ''%CR%'')
+  ) AS num_arq,
+
+  COUNT(*) FILTER (
+    WHERE sme.tipo_registro ILIKE ''%ARM%''
+  ) AS num_ARM,
+
+  COUNT(*) FILTER (
+    WHERE sme.tipo_registro ILIKE ''%POSTE%''
+  ) AS num_Poste, 
+
+  COUNT(*) FILTER (
+    WHERE sme.tipo_registro ILIKE ''%CANAL%'' OR sme.tipo_registro IS NULL
+  ) AS canalizado,
+
+  COUNT(*) FILTER (
+    WHERE NOT (
+      (sme.tipo_registro ILIKE ''%CR%'' OR 
+       (sme.tipo_registro ILIKE ''OTROS'' AND sme.observaciones LIKE ''%CR%''))
+      OR (sme.tipo_registro ILIKE ''%Arq%'' OR 
+          (sme.tipo_registro ILIKE ''OTROS'' AND sme.observaciones NOT LIKE ''%CR%''))
+      OR sme.tipo_registro ILIKE ''%ARM%''
+      OR sme.tipo_registro ILIKE ''%POSTE%''
+      OR sme.tipo_registro ILIKE ''%CANAL%''
+      OR sme.tipo_registro IS NULL
+    )
+  ) AS Pedestal,
+
+  COUNT(*) AS total,
+  json_agg(tipo_registro) AS tipo_registro, 
+  json_agg(uso) AS uso
+
+FROM escapex."SucMarco" sm 
+INNER JOIN escapex."SucMarcoElement" sme 
+  ON sm.id = sme.suc_marco_id 
+WHERE id_operador = 1 
+GROUP BY num_suc, sm.miga, estado
+                )
+                SELECT num_suc, ''Nª CR "USO-0"'' AS estado, num_cr0 AS fecha FROM datos
+                UNION ALL
+                SELECT num_suc, ''Nª AISLADA'' AS estado, canalizado AS fecha FROM datos
+                UNION ALL
+                SELECT num_suc, ''Nª PEDESTAL'' AS estado, pedestal AS fecha FROM datos
+            '
+        ) AS sm(num_suc TEXT, estado TEXT, fecha TEXT)
+        INNER JOIN public."work_packages" wp
+        ON wp.subject = sm.num_suc
+        ORDER BY wp.id, sm.estado
+    )
+    INSERT INTO public.custom_values (customized_type, customized_id, custom_field_id, value)
+    SELECT
+        'WorkPackage',
+        datos.work_package_id,
+        fields.id,
+        NULL --TO_CHAR(datos.fecha, 'YY-MM-DD')
+    FROM datos
+    JOIN public.custom_fields AS fields ON fields.name = datos.estado
+    WHERE NOT EXISTS (
+        SELECT 1
+        FROM public.custom_values cv
+        WHERE cv.customized_type = 'WorkPackage'
+          AND cv.customized_id = datos.work_package_id
+          AND cv.custom_field_id = fields.id
+    );
+    """
+    query11 = """
+WITH datos AS (
+        SELECT wp.id AS work_package_id, sm.estado, sm.fecha
+        FROM
+        dblink(
+            'host=suc.insdosl.com port=5001 dbname=PRO user=insdo_backup password=1nSd0%24',
+            '
+                WITH datos AS (
+                    SELECT 
+  num_suc, 
+  sm.miga, 
+  estado,  
+
+  COUNT(*) FILTER (
+    WHERE 
+      (sme.tipo_registro ILIKE ''%CR%'' OR 
+       (sme.tipo_registro ILIKE ''OTROS'' AND sme.observaciones LIKE ''%CR%'')) 
+      AND uso <> ''0''
+  ) AS num_CR,
+
+  COUNT(*) FILTER (
+    WHERE 
+      (sme.tipo_registro ILIKE ''%CR%'' OR 
+       (sme.tipo_registro ILIKE ''OTROS'' AND sme.observaciones LIKE ''%CR%'')) 
+      AND uso = ''0''
+  ) AS num_CR0,
+
+  COUNT(*) FILTER (
+    WHERE 
+      sme.tipo_registro ILIKE ''%Arq%'' OR 
+      (sme.tipo_registro ILIKE ''OTROS'' AND sme.observaciones NOT LIKE ''%CR%'')
+  ) AS num_arq,
+
+  COUNT(*) FILTER (
+    WHERE sme.tipo_registro ILIKE ''%ARM%''
+  ) AS num_ARM,
+
+  COUNT(*) FILTER (
+    WHERE sme.tipo_registro ILIKE ''%POSTE%''
+  ) AS num_Poste, 
+
+  COUNT(*) FILTER (
+    WHERE sme.tipo_registro ILIKE ''%CANAL%'' OR sme.tipo_registro IS NULL
+  ) AS canalizado,
+
+  COUNT(*) FILTER (
+    WHERE NOT (
+      (sme.tipo_registro ILIKE ''%CR%'' OR 
+       (sme.tipo_registro ILIKE ''OTROS'' AND sme.observaciones LIKE ''%CR%''))
+      OR (sme.tipo_registro ILIKE ''%Arq%'' OR 
+          (sme.tipo_registro ILIKE ''OTROS'' AND sme.observaciones NOT LIKE ''%CR%''))
+      OR sme.tipo_registro ILIKE ''%ARM%''
+      OR sme.tipo_registro ILIKE ''%POSTE%''
+      OR sme.tipo_registro ILIKE ''%CANAL%''
+      OR sme.tipo_registro IS NULL
+    )
+  ) AS Pedestal,
+
+  COUNT(*) AS total,
+  json_agg(tipo_registro) AS tipo_registro, 
+  json_agg(uso) AS uso
+
+FROM escapex."SucMarco" sm 
+INNER JOIN escapex."SucMarcoElement" sme 
+  ON sm.id = sme.suc_marco_id 
+WHERE id_operador = 1 
+GROUP BY num_suc, sm.miga, estado
+                )
+                SELECT num_suc, ''Nª CR "USO-0"'' AS estado, num_cr0 AS fecha FROM datos
+                UNION ALL
+                SELECT num_suc, ''Nª AISLADA'' AS estado, canalizado AS fecha FROM datos
+                UNION ALL
+                SELECT num_suc, ''Nª PEDESTAL'' AS estado, pedestal AS fecha FROM datos
+            '
+        ) AS sm(num_suc TEXT, estado TEXT, fecha TEXT)
+        INNER JOIN public."work_packages" wp
+        ON wp.subject = sm.num_suc
+        ORDER BY wp.id, sm.estado
+    ),
+    actualizar AS (
+        SELECT
+            cv.id AS custom_value_id,
+            d.fecha
+        FROM custom_values cv
+        INNER JOIN datos d
+            ON cv.customized_id = d.work_package_id
+        INNER JOIN custom_fields cf
+            ON cf.id = cv.custom_field_id AND cf.name = d.estado
+    )
+    UPDATE custom_values cv
+    SET value = actualizar.fecha
+    FROM actualizar
+    WHERE cv.id = actualizar.custom_value_id;
+    """
+    query12 = """
+UPDATE public.work_packages wp
+SET project_id = p.id
+FROM public.custom_values cv
+JOIN public.custom_fields cf ON cf.id = cv.custom_field_id
+JOIN public.projects p ON p.name = cv.value
+WHERE
+  wp.id = cv.customized_id
+  AND wp.type_id = 8
+  AND cf.name = 'PARTNER';
+    """
+    query13 = """
+UPDATE public.work_packages wp
+SET project_id = p.id
+FROM public.custom_values cv
+JOIN public.custom_fields cf ON cf.id = cv.custom_field_id
+JOIN public.projects p ON p.name = cv.value || ' PETICIONES'
+WHERE
+  wp.id = cv.customized_id
+  AND wp.type_id = 9
+  AND cf.name = 'PARTNER';
+    """
 
     # Ejecutar la consulta
     cursor.execute(query)
@@ -620,6 +853,10 @@ WHERE sm.id_operador = 1
     cursor.execute(query7)
     cursor.execute(query8)
     cursor.execute(query9)
+    cursor.execute(query10)
+    cursor.execute(query11)
+    cursor.execute(query12)
+    cursor.execute(query13)
     # Confirmar la transacción
     connection.commit()
 

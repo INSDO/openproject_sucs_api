@@ -11,6 +11,7 @@ import json
 import tempfile
 import os
 import pandas as pd
+import psycopg2
 from requests.auth import HTTPBasicAuth
 
 # Configuración de logging
@@ -274,70 +275,51 @@ async def filter_with_and(filters: Dict[str, List[str]]):
 
 @api_router.get("/get-all-tasks", dependencies=[Depends(verify_credentials)])
 async def get_all_tasks():
-    # Obtener todas las tareas sin filtrar
-    work_packages = get_all_work_packages()  # Esta función debe devolver todas las tareas
+    try:
+        conn = None
+        # Conexión a PostgreSQL
+        conn = psycopg2.connect(
+            host="suc.insdosl.com",
+            port="5433",
+            database="openproject",
+            user="postgres",
+            password="p4ssw0rd"
+        )
 
-    if not work_packages:
-        raise HTTPException(status_code=404, detail="No se encontraron tareas.")
+        # Ejecutar la consulta
+        query = "SELECT subject, custom_fields FROM public.vw_work_packages_custom"
+        df = pd.read_sql(query, conn)
 
-    # Diccionario de customfields
-    customfield_mapping = {
-        1: "ANULADA", 2: "ANULADA CON COSTE", 3: "AR Y MD FACILITADAS", 4: "AR Y MD INCORRECTA",
-        5: "AVISO DE NO OCUPACION", 6: "AVISO PARA RECIBIR AR Y MD", 7: "BAJA CONFIRMADA", 8: "BAJA SOLICITADA",
-        9: "CITA DE REPLANTEO ACEPTADA", 10: "CITA DE REPLANTEO PROPUESTA", 11: "CITA DE REPLANTEO RECHAZADA",
-        12: "CONCESIÓN DEL PERMISO", 13: "EJECUCION EN OBRAS", 14: "EJECUCION TENDIDO", 15: "FIN DE LAS OBRAS",
-        16: "INCIDENCIA", 17: "INCIDENCIA DE REPLANTEO", 18: "INICIO DE LAS OBRAS", 19: "NO CONFIRMADA",
-        20: "OCUPACION", 21: "OCUPACION RECTIFICADA", 22: "PDTE. ANULADA CON COSTE", 23: "PERMISOS",
-        24: "PROYECTO ESPECIFICO", 25: "PROYECTO INVIABLE. PDTE OPERADOR", 26: "PROYECTO INVIABLE. PDTE REVISION",
-        27: "PTE. REPLANTEO AUTÓNOMO", 28: "REPLANTEO REALIZADO. VIABLE", 29: "RESERVADA SIN OCUPAR",
-        30: "TENDIDO", 31: "CÓDIGO Y PLANO SUC", 32: "MUNICIPIO", 33: "CODIGO MIGA", 34: "REPLANTEO AUTONOMO",
-        35: "REPLANTEO CONJUNTO", 36: "HORA REPLANTEO", 37: "INICIO EJECUCION", 38: "LIMITE EJECUCION",
-        50: "F. INICIO OBRA", 51: "F. SOLIC. PERMISOS", 52: "F. FINAL OBRA", 53: "SOLICITADO POR",
-        55: "Gestor corrección AR y MD INCORRECTA", 56: "FECHA AR Y MD INCORRECTA", 57: "FECHA RESOLUCIÓN AR Y MD INCORRECTA",
-        39: "MALLA GEO. (m)", 42: "Nª CR 'USO-0'", 58: "REGISTROS FINALES TRAS AR Y MD FACILITADAS",
-        87: "FECHA POSIBLE ANULACIÓN", 88: "NOMBRE ARCHIVO ORIGINAL", 62: "ESTADO ACTUAL NEON", 89: "ANOTACION GESTOR",
-        54: "AR Y MD ENVIADAS", 90: "ID SUC", 60: "ES INVIABLE OCULTA", 61: "OBSERVACIONES NEON",
-        63: "CODIGO ANOTACION", 64: "ANOTACION", 65: "Gestor elaboración MD", 66: "GESTOR PPAL",
-        91: "CONSULTADO_DEVUELTO_ANULADO", 92: "CORREO", 93: "DEFINE SECTOR_CLUSTER", 70: "ENCARGO",
-        71: "PARTNER", 72: "TIPO REPLANTEO (CONJUNTO/AUTÓNOMO)", 73: "MD AR", 76: "APROBACIÓN COSTES PMO",
-        43: "Nª CR", 45: "Nª PEDESTAL", 46: "Nª AISLADA", 47: "Nª POSTES", 48: "COSTE SUSTITUCION",
-        74: "CANALIZADO (m)", 94: "DOCUMENTACION ADJUNTA", 95: "ENTIDAD SINGULAR", 96: "NUMERO TOTAL DE REGISTROS A SOLICITAR",
-        97: "NUMERO TOTAL DE SUC A SOLICITAR", 98: "PRIORIDAD", 80: "SUSTITUCION POSTES", 82: "SUSTITUCION POSTES BOOL",
-        41: "SUB UTILIZADO (m)", 68: "SE PUEDE AVANZAR(SI/NO)", 99: "SEMANA SOLICITADA", 75: "SAL. LAT. (m)",
-        40: "SUB INSTALADO (m)", 69: "ES PRIO TESA", 59: "ES DE POSTE (SI/NO)", 83: "PROVINCIA", 84: "CENTRAL",
-        85: "PTE. DATOS REPLANTEO AUTÓNOMO", 44: "Nª ARQ", 86: "AP-DN", 100: "SUC YA REPLANTEADA", 101: "TIPO DE INFRAESTRUCTURA",
-        102: "TIPO DE RED", 103: "TIPO DE SUC", 104: "TASK ID", 105: "DOC ARCHIVADA", 106: "EN CURSO",
-        107: "ESTIMACION TIEMPO DEDICADO (H)", 77: "ALTA SOLICITUD", 108: "FECHA DE ANULACION", 109: "FECHA DE CONSULTA",
-        110: "FECHA DE DEVOLUCION", 111: "FECHA PREVISION DESPLIEGUE", 112: "PINTADO", 113: "REGISTROS FINALES",
-        114: "SOLICITADO", 115: "OBSERVACIONES GESTOR SUC INSDO/EACOM", 117: "FECHA REGISTRO INV. OPE",
-        118: "ESTADO GESTORES INV. OPE", 119: "DISCONFORMIDAD", 120: "FECHA RECLAMACION", 121: "MOTIVO",
-        124: "HOJAS", 67: "SE PUEDE ANULAR (SI/NO)", 126: "ANÁLISIS PARTNER ANULAR (SI/NO)", 127: "ESTADO GESTORES INV. OPE NEW",
-        128: "DINSCONFORMIDAD NEW", 129: "CODIGO ANOTACION NEW"
-    }
+        # Convertir la columna custom_fields (JSON) en columnas
+        custom_df = df['custom_fields'].apply(
+            lambda x: json.loads(x) if isinstance(x, str) and x else x
+        ).apply(pd.Series)
 
-    df = pd.DataFrame([{
-        "ID": wp["id"],
-        "Asunto": wp["subject"]["raw"] if isinstance(wp["subject"], dict) else wp["subject"],
-        "Estado": wp["status"]["name"] if wp.get("status") else None,
-        "Tipo": wp["type"]["name"] if wp.get("type") else None,
-        **{
-           customfield_mapping[num]: wp.get(f"customField{num}", None)
-           for num in customfield_mapping
-        }
-    } for wp in work_packages])
+        # Combinar con la columna subject
+        final_df = pd.concat([df['subject'], custom_df], axis=1)
 
-    # Guardar los datos en un archivo Excel temporal
-    with tempfile.NamedTemporaryFile(delete=False, suffix=".xlsx") as tmp:
-        df.to_excel(tmp.name, index=False, engine="openpyxl")
-        tmp_path = tmp.name
+        # Guardar los datos en un archivo Excel temporal
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".xlsx") as tmp:
+            final_df.to_excel(tmp.name, index=False, engine="openpyxl")
+            tmp_path = tmp.name
 
-    # Enviar el archivo como respuesta
-    return FileResponse(
-        path=tmp_path,
-        filename="tareas.xlsx",
-        media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-    )
+        # Enviar el archivo como respuesta
+        return FileResponse(
+            path=tmp_path,
+            filename="work_packages.xlsx",
+            media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )
 
+
+    except psycopg2.OperationalError as e:
+        raise HTTPException(status_code=500, detail=f"Error de conexión a la base de datos: {str(e)}")
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error al obtener las tareas: {str(e)}")
+
+    finally:
+        if conn:
+            conn.close()
 
 # Incluir el router en la aplicación
 app.include_router(api_router)

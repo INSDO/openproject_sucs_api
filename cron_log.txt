@@ -1222,3 +1222,765 @@ Consulta ejecutada correctamente
 
 [2025-04-23 06:04:02.659913] STDERR:
 
+
+[2025-04-23 15:02:06.835554] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-23 15:02:06.835573] STDERR:
+
+
+[2025-04-24 06:03:52.461159] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-24 06:03:52.461186] STDERR:
+
+
+[2025-04-24 15:02:01.066109] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-24 15:02:01.066126] STDERR:
+
+
+[2025-04-25 06:02:02.778372] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-25 06:02:02.778387] STDERR:
+
+
+[2025-04-25 15:02:11.965247] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-25 15:02:11.965268] STDERR:
+
+
+[2025-04-26 06:01:55.562804] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-26 06:01:55.562818] STDERR:
+
+
+[2025-04-26 15:03:48.872875] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-26 15:03:48.872906] STDERR:
+
+
+[2025-04-27 06:01:53.360671] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-27 06:01:53.360693] STDERR:
+
+
+[2025-04-27 15:01:46.963973] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-27 15:01:46.963989] STDERR:
+
+
+[2025-04-28 06:01:49.623596] STDOUT:
+Consulta ejecutada correctamente
+
+[2025-04-28 06:01:49.623610] STDERR:
+
+
+[2025-04-28 15:02:15.629060] STDOUT:
+Error al ejecutar la consulta: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+
+[2025-04-28 15:02:15.629074] STDERR:
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 631, in <module>
+    if connection:
+NameError: name 'connection' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 636, in <module>
+    if cursor:
+NameError: name 'cursor' is not defined
+
+
+[2025-04-29 06:02:13.196116] STDOUT:
+Error al ejecutar la consulta: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+
+[2025-04-29 06:02:13.196131] STDERR:
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 631, in <module>
+    if connection:
+NameError: name 'connection' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 636, in <module>
+    if cursor:
+NameError: name 'cursor' is not defined
+
+
+[2025-04-29 15:02:12.555817] STDOUT:
+Error al ejecutar la consulta: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+
+[2025-04-29 15:02:12.555834] STDERR:
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 631, in <module>
+    if connection:
+NameError: name 'connection' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 636, in <module>
+    if cursor:
+NameError: name 'cursor' is not defined
+
+
+[2025-04-30 06:02:14.221240] STDOUT:
+Error al ejecutar la consulta: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+
+[2025-04-30 06:02:14.221254] STDERR:
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 631, in <module>
+    if connection:
+NameError: name 'connection' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 636, in <module>
+    if cursor:
+NameError: name 'cursor' is not defined
+
+
+[2025-04-30 15:02:13.581507] STDOUT:
+Error al ejecutar la consulta: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+
+[2025-04-30 15:02:13.581520] STDERR:
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 655, in <module>
+    if connection:
+NameError: name 'connection' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 660, in <module>
+    if cursor:
+NameError: name 'cursor' is not defined
+
+
+[2025-05-01 06:02:15.244926] STDOUT:
+Error al ejecutar la consulta: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+
+[2025-05-01 06:02:15.244939] STDERR:
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 655, in <module>
+    if connection:
+NameError: name 'connection' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 660, in <module>
+    if cursor:
+NameError: name 'cursor' is not defined
+
+
+[2025-05-01 15:02:14.605186] STDOUT:
+Error al ejecutar la consulta: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+
+[2025-05-01 15:02:14.605200] STDERR:
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 655, in <module>
+    if connection:
+NameError: name 'connection' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 660, in <module>
+    if cursor:
+NameError: name 'cursor' is not defined
+
+
+[2025-05-02 06:02:16.268813] STDOUT:
+Error al ejecutar la consulta: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+
+[2025-05-02 06:02:16.268833] STDERR:
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 655, in <module>
+    if connection:
+NameError: name 'connection' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 660, in <module>
+    if cursor:
+NameError: name 'cursor' is not defined
+
+
+[2025-05-02 15:02:15.629343] STDOUT:
+Error al ejecutar la consulta: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+
+[2025-05-02 15:02:15.629359] STDERR:
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 868, in <module>
+    if connection:
+NameError: name 'connection' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 873, in <module>
+    if cursor:
+NameError: name 'cursor' is not defined
+
+
+[2025-05-03 06:02:13.197569] STDOUT:
+Error al ejecutar la consulta: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+
+[2025-05-03 06:02:13.197583] STDERR:
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 868, in <module>
+    if connection:
+NameError: name 'connection' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 873, in <module>
+    if cursor:
+NameError: name 'cursor' is not defined
+
+
+[2025-05-03 15:02:12.558024] STDOUT:
+Error al ejecutar la consulta: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+
+[2025-05-03 15:02:12.558036] STDERR:
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 868, in <module>
+    if connection:
+NameError: name 'connection' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 873, in <module>
+    if cursor:
+NameError: name 'cursor' is not defined
+
+
+[2025-05-04 06:02:14.222271] STDOUT:
+Error al ejecutar la consulta: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+
+[2025-05-04 06:02:14.222287] STDERR:
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 868, in <module>
+    if connection:
+NameError: name 'connection' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 873, in <module>
+    if cursor:
+NameError: name 'cursor' is not defined
+
+
+[2025-05-04 15:02:13.581027] STDOUT:
+Error al ejecutar la consulta: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+
+[2025-05-04 15:02:13.581042] STDERR:
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 868, in <module>
+    if connection:
+NameError: name 'connection' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 873, in <module>
+    if cursor:
+NameError: name 'cursor' is not defined
+
+
+[2025-05-05 06:02:15.246086] STDOUT:
+Error al ejecutar la consulta: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+
+[2025-05-05 06:02:15.246109] STDERR:
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 868, in <module>
+    if connection:
+NameError: name 'connection' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 873, in <module>
+    if cursor:
+NameError: name 'cursor' is not defined
+
+
+[2025-05-05 15:02:14.605029] STDOUT:
+Error al ejecutar la consulta: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+
+[2025-05-05 15:02:14.605044] STDERR:
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 868, in <module>
+    if connection:
+NameError: name 'connection' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 873, in <module>
+    if cursor:
+NameError: name 'cursor' is not defined
+
+
+[2025-05-06 06:02:16.268381] STDOUT:
+Error al ejecutar la consulta: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+
+[2025-05-06 06:02:16.268394] STDERR:
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 868, in <module>
+    if connection:
+NameError: name 'connection' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 873, in <module>
+    if cursor:
+NameError: name 'cursor' is not defined
+
+
+[2025-05-06 15:02:15.632685] STDOUT:
+Error al ejecutar la consulta: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+
+[2025-05-06 15:02:15.632703] STDERR:
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 868, in <module>
+    if connection:
+NameError: name 'connection' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 873, in <module>
+    if cursor:
+NameError: name 'cursor' is not defined
+
+
+[2025-05-07 06:02:13.196644] STDOUT:
+Error al ejecutar la consulta: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+
+[2025-05-07 06:02:13.196662] STDERR:
+Traceback (most recent call last):
+  File "tasks/update.py", line 7, in <module>
+    connection = psycopg2.connect(
+  File "/usr/local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "suc.insdosl.com" (162.19.56.57), port 5433 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 868, in <module>
+    if connection:
+NameError: name 'connection' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tasks/update.py", line 873, in <module>
+    if cursor:
+NameError: name 'cursor' is not defined
+
