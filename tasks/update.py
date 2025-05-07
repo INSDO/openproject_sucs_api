@@ -17,31 +17,31 @@ try:
     # Definir la consulta SQL
     query = """
     INSERT INTO public.work_packages(
-        type_id, 
-        project_id, 
-        subject, 
-        description, 
-        status_id, 
-        priority_id, 
-        author_id, 
-        lock_version, 
-        created_at, 
-        updated_at, 
+        type_id,
+        project_id,
+        subject,
+        description,
+        status_id,
+        priority_id,
+        author_id,
+        lock_version,
+        created_at,
+        updated_at,
         schedule_manually,
         ignore_non_working_days
     )
-    SELECT 
-        8, 
+    SELECT
+        8,
         44,
-        s.num_suc, 
-        '', 
-        18, 
-        8, 
-        4, 
-        2, 
-        NOW(), 
-        NOW(), 
-        false, 
+        s.num_suc,
+        '',
+        18,
+        8,
+        4,
+        2,
+        NOW(),
+        NOW(),
+        false,
         false
     FROM dblink(
         'host=suc.insdosl.com port=5001 dbname=PRO user=insdo_backup password=1nSd0%24',
@@ -58,24 +58,24 @@ WITH datos AS (
     WITH escapex_data AS (
         SELECT num_suc, cleaned_historial_estados_json
         FROM dblink(
-            'host=suc.insdosl.com port=5001 dbname=PRO user=insdo_backup password=1nSd0%24', 
+            'host=suc.insdosl.com port=5001 dbname=PRO user=insdo_backup password=1nSd0%24',
             'SELECT num_suc, cleaned_historial_estados_json FROM escapex.sucsestados_view WHERE num_suc LIKE ''907%'' ORDER BY num_suc ASC'
         ) AS se(num_suc TEXT, cleaned_historial_estados_json JSONB)
     )
-    SELECT 
-        wp.id AS work_package_id, 
-        (jsonb_array_elements(se.cleaned_historial_estados_json::jsonb)->>'estado') AS estado, 
+    SELECT
+        wp.id AS work_package_id,
+        (jsonb_array_elements(se.cleaned_historial_estados_json::jsonb)->>'estado') AS estado,
         (jsonb_array_elements(se.cleaned_historial_estados_json::jsonb)->>'fecha')::timestamp AS fecha
-    FROM 
+    FROM
         public.work_packages wp
     JOIN escapex_data se ON wp.subject = se.num_suc
 )
 INSERT INTO public.custom_values (customized_type, customized_id, custom_field_id, value)
-SELECT 
-    'WorkPackage', 
-    datos.work_package_id, 
-    fields.id, 
-    NULL --TO_CHAR(datos.fecha, 'YY-MM-DD') 
+SELECT
+    'WorkPackage',
+    datos.work_package_id,
+    fields.id,
+    NULL --TO_CHAR(datos.fecha, 'YY-MM-DD')
 FROM datos
 JOIN public.custom_fields AS fields ON fields.name = datos.estado
 WHERE NOT EXISTS (
@@ -94,8 +94,8 @@ WHERE NOT EXISTS (
             'host=suc.insdosl.com port=5001 dbname=PRO user=insdo_backup password=1nSd0%24',
             'SELECT num_suc, cleaned_historial_estados_json FROM escapex.sucsestados_view WHERE num_suc LIKE ''907%'' ORDER BY num_suc ASC'
         ) AS se(num_suc TEXT, cleaned_historial_estados_json JSONB)
-       	),
-		exploded_data AS (
+        ),
+                exploded_data AS (
     SELECT
         wp.id AS work_package_id,
         estado_fecha.estado,
@@ -138,26 +138,26 @@ WHERE cv.id = actualizar.custom_value_id;
     query4 = """
     WITH datos AS (
         SELECT wp.id AS work_package_id, sm.estado, sm.fecha
-        FROM 
+        FROM
         dblink(
             'host=suc.insdosl.com port=5001 dbname=PRO user=insdo_backup password=1nSd0%24',
             '
                 WITH datos AS (
-                    SELECT 
-                        CAST(sm.num_suc AS TEXT) AS num_suc, 
+                    SELECT
+                        CAST(sm.num_suc AS TEXT) AS num_suc,
                         CAST(sm.conductos_instalados AS TEXT) AS conductos_instalados,
                         CAST(sm.conductos_utilizados AS TEXT) AS conductos_utilizados,
                         CAST(COUNT(smc.longitud_cable_dm) AS TEXT) AS longitud_cable_dm,
-                        CASE 
+                        CASE
                             WHEN COUNT(*) FILTER (WHERE sme.tipo_registro ILIKE ''%POSTE%'') > 0 THEN ''SI''
                             ELSE ''NO''
                         END AS tiene_poste
-                    FROM escapex."SucMarco" sm 
-                    INNER JOIN escapex."SucMarcoElement" sme 
-                        ON sm.id = sme.suc_marco_id 
+                    FROM escapex."SucMarco" sm
+                    INNER JOIN escapex."SucMarcoElement" sme
+                        ON sm.id = sme.suc_marco_id
                     INNER JOIN escapex."SucMarcoConduct" smc
-                        ON sm.id = smc.suc_marco_id 
-                    WHERE sm.id_operador = 1 
+                        ON sm.id = smc.suc_marco_id
+                    WHERE sm.id_operador = 1
                     GROUP BY sm.num_suc, sm.conductos_instalados, sm.conductos_utilizados
                 )
                 SELECT num_suc, ''SUB INSTALADO (m)'' AS estado, conductos_instalados AS fecha FROM datos
@@ -174,11 +174,11 @@ WHERE cv.id = actualizar.custom_value_id;
         ORDER BY wp.id, sm.estado
     )
     INSERT INTO public.custom_values (customized_type, customized_id, custom_field_id, value)
-    SELECT 
-        'WorkPackage', 
-        datos.work_package_id, 
-        fields.id, 
-        NULL --TO_CHAR(datos.fecha, 'YY-MM-DD') 
+    SELECT
+        'WorkPackage',
+        datos.work_package_id,
+        fields.id,
+        NULL --TO_CHAR(datos.fecha, 'YY-MM-DD')
     FROM datos
     JOIN public.custom_fields AS fields ON fields.name = datos.estado
     WHERE NOT EXISTS (
@@ -193,26 +193,26 @@ WHERE cv.id = actualizar.custom_value_id;
     query5 = """
     WITH datos AS (
         SELECT wp.id AS work_package_id, sm.estado, sm.fecha
-        FROM 
+        FROM
         dblink(
             'host=suc.insdosl.com port=5001 dbname=PRO user=insdo_backup password=1nSd0%24',
             '
                 WITH datos AS (
-                    SELECT 
-                        CAST(sm.num_suc AS TEXT) AS num_suc, 
+                    SELECT
+                        CAST(sm.num_suc AS TEXT) AS num_suc,
                         CAST(sm.conductos_instalados AS TEXT) AS conductos_instalados,
                         CAST(sm.conductos_utilizados AS TEXT) AS conductos_utilizados,
                         CAST(COUNT(smc.longitud_cable_dm) AS TEXT) AS longitud_cable_dm,
-                        CASE 
+                        CASE
                             WHEN COUNT(*) FILTER (WHERE sme.tipo_registro ILIKE ''%POSTE%'') > 0 THEN ''SI''
                             ELSE ''NO''
                         END AS tiene_poste
-                    FROM escapex."SucMarco" sm 
-                    INNER JOIN escapex."SucMarcoElement" sme 
-                        ON sm.id = sme.suc_marco_id 
+                    FROM escapex."SucMarco" sm
+                    INNER JOIN escapex."SucMarcoElement" sme
+                        ON sm.id = sme.suc_marco_id
                     INNER JOIN escapex."SucMarcoConduct" smc
-                        ON sm.id = smc.suc_marco_id 
-                    WHERE sm.id_operador = 1 
+                        ON sm.id = smc.suc_marco_id
+                    WHERE sm.id_operador = 1
                     GROUP BY sm.num_suc, sm.conductos_instalados, sm.conductos_utilizados
                 )
                 SELECT num_suc, ''SUB INSTALADO (m)'' AS estado, conductos_instalados AS fecha FROM datos
@@ -229,13 +229,13 @@ WHERE cv.id = actualizar.custom_value_id;
         ORDER BY wp.id, sm.estado
     ),
     actualizar AS (
-        SELECT 
+        SELECT
             cv.id AS custom_value_id,
             d.fecha
         FROM custom_values cv
-        INNER JOIN datos d 
+        INNER JOIN datos d
             ON cv.customized_id = d.work_package_id
-        INNER JOIN custom_fields cf 
+        INNER JOIN custom_fields cf
             ON cf.id = cv.custom_field_id AND cf.name = d.estado
     )
     UPDATE custom_values cv
@@ -248,7 +248,7 @@ WHERE cv.id = actualizar.custom_value_id;
     query6 = """
     WITH datos AS (
         SELECT wp.id AS work_package_id, sm.estado, sm.fecha
-        FROM 
+        FROM
         dblink(
             'host=suc.insdosl.com port=5001 dbname=PRO user=insdo_backup password=1nSd0%24',
             '
@@ -262,17 +262,17 @@ WHERE cv.id = actualizar.custom_value_id;
                 FROM escapex."SucMarco" sm
                 WHERE id_operador = 1
 
-		UNION ALL
+                UNION ALL
 
-			SELECT CAST(num_suc AS TEXT) AS num_suc, ''REPLANTEO CONJUNTO'' AS estado, CAST(sm.fecha_replanteo AS TEXT) AS fecha
+                        SELECT CAST(num_suc AS TEXT) AS num_suc, ''REPLANTEO CONJUNTO'' AS estado, CAST(sm.fecha_replanteo AS TEXT) AS fecha
             FROM escapex."SucMarco" sm
             WHERE id_operador = 1
 
 
-		UNION ALL
+                UNION ALL
 
-		SELECT 
-    CAST(sm.num_suc AS TEXT) AS num_suc, 
+                SELECT
+    CAST(sm.num_suc AS TEXT) AS num_suc,
     ''MUNICIPIO'' AS estado,
     mun.nameunit AS fecha
 FROM escapex."SucMarco" sm
@@ -281,10 +281,10 @@ JOIN escapex."Manholes" man ON se.gid = man.gid_element
 JOIN spain."Municipios" mun ON ST_Intersects(man.geom, mun.geom)
 WHERE sm.id_operador = 1
 
-		UNION ALL
+                UNION ALL
 
-SELECT 
-    CAST(sm.num_suc AS TEXT) AS num_suc, 
+SELECT
+    CAST(sm.num_suc AS TEXT) AS num_suc,
     ''CENTRAL'' AS estado,
     ce.te_nombre_central AS fecha
 FROM escapex."SucMarco" sm
@@ -301,7 +301,7 @@ WHERE sm.id_operador = 1
 
                 UNION ALL
 
-                SELECT CAST(num_suc AS TEXT) AS num_suc, ''ES INVIABLE OCULTA'' AS estado, 
+                SELECT CAST(num_suc AS TEXT) AS num_suc, ''ES INVIABLE OCULTA'' AS estado,
                 CASE WHEN sm.no_ejecucion_proyecto = TRUE THEN ''SI''
                     WHEN sm.no_ejecucion_proyecto = FALSE THEN ''NO''
                     ELSE ''DESCONOCIDO''
@@ -311,7 +311,7 @@ WHERE sm.id_operador = 1
 
                 UNION ALL
 
-                SELECT CAST(num_suc AS TEXT) AS num_suc, ''REGISTROS FINALES TRAS AR Y MD FACILITADAS'' AS estado, 
+                SELECT CAST(num_suc AS TEXT) AS num_suc, ''REGISTROS FINALES TRAS AR Y MD FACILITADAS'' AS estado,
                 CAST(COUNT(smd.id) AS TEXT) AS fecha
                 FROM escapex."SucMarco" sm
                 LEFT JOIN escapex."SucMarcoMd" smd ON smd.suc_marco_id = sm.id
@@ -380,30 +380,30 @@ WHERE sm.id_operador = 1
 
                 UNION ALL
 
-                SELECT CAST(num_suc AS TEXT) AS num_suc, ''Nª CR'' AS estado, 
+                SELECT CAST(num_suc AS TEXT) AS num_suc, ''Nª CR'' AS estado,
                     CAST(COUNT(*) FILTER (WHERE sme.tipo_registro ILIKE ''%CR%'' OR (sme.tipo_registro ILIKE ''OTROS'' AND sme.observaciones LIKE ''%CR%'')) AS TEXT) AS fecha
                 FROM escapex."SucMarco" sm
-                INNER JOIN escapex."SucMarcoElement" sme 
+                INNER JOIN escapex."SucMarcoElement" sme
                     ON sm.id = sme.suc_marco_id
                 WHERE id_operador = 1
                 GROUP BY num_suc
 
                 UNION ALL
 
-                SELECT CAST(num_suc AS TEXT) AS num_suc, ''Nª ARQ'' AS estado, 
+                SELECT CAST(num_suc AS TEXT) AS num_suc, ''Nª ARQ'' AS estado,
                     CAST(COUNT(*) FILTER (WHERE sme.tipo_registro ILIKE ''%Arq%'' OR (sme.tipo_registro ILIKE ''OTROS'' AND sme.observaciones NOT LIKE ''%CR%'')) AS TEXT) AS fecha
                 FROM escapex."SucMarco" sm
-                INNER JOIN escapex."SucMarcoElement" sme 
+                INNER JOIN escapex."SucMarcoElement" sme
                     ON sm.id = sme.suc_marco_id
                 WHERE id_operador = 1
                 GROUP BY num_suc
 
                 UNION ALL
 
-                SELECT CAST(num_suc AS TEXT) AS num_suc, ''Nª POSTES'' AS estado, 
+                SELECT CAST(num_suc AS TEXT) AS num_suc, ''Nª POSTES'' AS estado,
                     CAST(COUNT(*) FILTER (WHERE sme.tipo_registro ILIKE ''%POSTE%'') AS TEXT) AS fecha
                 FROM escapex."SucMarco" sm
-                INNER JOIN escapex."SucMarcoElement" sme 
+                INNER JOIN escapex."SucMarcoElement" sme
                     ON sm.id = sme.suc_marco_id
                 WHERE id_operador = 1
                 GROUP BY num_suc
@@ -414,11 +414,11 @@ WHERE sm.id_operador = 1
         ORDER BY wp.id, sm.estado
     )
     INSERT INTO public.custom_values (customized_type, customized_id, custom_field_id, value)
-    SELECT 
-        'WorkPackage', 
-        datos.work_package_id, 
-        fields.id, 
-        NULL --TO_CHAR(datos.fecha, 'YY-MM-DD') 
+    SELECT
+        'WorkPackage',
+        datos.work_package_id,
+        fields.id,
+        NULL --TO_CHAR(datos.fecha, 'YY-MM-DD')
     FROM datos
     JOIN public.custom_fields AS fields ON fields.name = datos.estado
     WHERE NOT EXISTS (
@@ -434,7 +434,7 @@ WHERE sm.id_operador = 1
     query7 = """
     WITH datos AS (
         SELECT wp.id as work_package_id, sm.estado, sm.fecha
-        FROM 
+        FROM
         dblink(
             'host=suc.insdosl.com port=5001 dbname=PRO user=insdo_backup password=1nSd0%24',
             '
@@ -448,7 +448,7 @@ WHERE sm.id_operador = 1
                 FROM escapex."SucMarco" sm
                 WHERE id_operador = 1
 
-		UNION ALL
+                UNION ALL
 
                         SELECT CAST(num_suc AS TEXT) AS num_suc, ''REPLANTEO CONJUNTO'' AS estado, CAST(sm.fecha_replanteo AS TEXT) AS fecha
             FROM escapex."SucMarco" sm
@@ -467,7 +467,7 @@ JOIN spain."Municipios" mun ON ST_Intersects(man.geom, mun.geom)
 WHERE sm.id_operador = 1
 
 
-		UNION ALL
+                UNION ALL
 
 SELECT
     CAST(sm.num_suc AS TEXT) AS num_suc,
@@ -489,7 +489,7 @@ WHERE sm.id_operador = 1
 
                 UNION ALL
 
-                SELECT CAST(num_suc AS TEXT) AS num_suc, ''ES INVIABLE OCULTA'' AS estado, 
+                SELECT CAST(num_suc AS TEXT) AS num_suc, ''ES INVIABLE OCULTA'' AS estado,
                 CASE WHEN sm.no_ejecucion_proyecto = TRUE THEN ''SI''
                     WHEN sm.no_ejecucion_proyecto = FALSE THEN ''NO''
                     ELSE ''DESCONOCIDO''
@@ -499,7 +499,7 @@ WHERE sm.id_operador = 1
 
                 UNION ALL
 
-                SELECT CAST(num_suc AS TEXT) AS num_suc, ''REGISTROS FINALES TRAS AR Y MD FACILITADAS'' AS estado, 
+                SELECT CAST(num_suc AS TEXT) AS num_suc, ''REGISTROS FINALES TRAS AR Y MD FACILITADAS'' AS estado,
                 CAST(COUNT(smd.id) AS TEXT) AS fecha
                 FROM escapex."SucMarco" sm
                 LEFT JOIN escapex."SucMarcoMd" smd ON smd.suc_marco_id = sm.id
@@ -568,33 +568,33 @@ WHERE sm.id_operador = 1
 
                 UNION ALL
 
-                SELECT CAST(num_suc AS TEXT) AS num_suc, ''Nª CR'' AS estado, 
+                SELECT CAST(num_suc AS TEXT) AS num_suc, ''Nª CR'' AS estado,
                     CAST(COUNT(*) FILTER (WHERE sme.tipo_registro ILIKE ''%CR%'' OR (sme.tipo_registro ILIKE ''OTROS'' AND sme.observaciones LIKE ''%CR%'')) AS TEXT) AS fecha
                 FROM escapex."SucMarco" sm
-                INNER JOIN escapex."SucMarcoElement" sme 
+                INNER JOIN escapex."SucMarcoElement" sme
                     ON sm.id = sme.suc_marco_id
                 WHERE id_operador = 1
                 GROUP BY num_suc
 
                 UNION ALL
 
-                SELECT CAST(num_suc AS TEXT) AS num_suc, ''Nª ARQ'' AS estado, 
+                SELECT CAST(num_suc AS TEXT) AS num_suc, ''Nª ARQ'' AS estado,
                     CAST(COUNT(*) FILTER (WHERE sme.tipo_registro ILIKE ''%Arq%'' OR (sme.tipo_registro ILIKE ''OTROS'' AND sme.observaciones NOT LIKE ''%CR%'')) AS TEXT) AS fecha
                 FROM escapex."SucMarco" sm
-                INNER JOIN escapex."SucMarcoElement" sme 
+                INNER JOIN escapex."SucMarcoElement" sme
                     ON sm.id = sme.suc_marco_id
                 WHERE id_operador = 1
                 GROUP BY num_suc
 
                 UNION ALL
 
-                SELECT CAST(num_suc AS TEXT) AS num_suc, ''Nª POSTES'' AS estado, 
+                SELECT CAST(num_suc AS TEXT) AS num_suc, ''Nª POSTES'' AS estado,
                     CAST(COUNT(*) FILTER (WHERE sme.tipo_registro ILIKE ''%POSTE%'') AS TEXT) AS fecha
                 FROM escapex."SucMarco" sm
-                INNER JOIN escapex."SucMarcoElement" sme 
+                INNER JOIN escapex."SucMarcoElement" sme
                     ON sm.id = sme.suc_marco_id
                 WHERE id_operador = 1
-		GROUP BY num_suc
+                GROUP BY num_suc
             '
         ) AS sm(num_suc TEXT, estado TEXT, fecha TEXT)
         INNER JOIN public."work_packages" wp
@@ -602,13 +602,13 @@ WHERE sm.id_operador = 1
         ORDER BY wp.id, sm.estado
     ),
     actualizar AS (
-        SELECT 
+        SELECT
             cv.id AS custom_value_id,
             d.fecha
         FROM custom_values cv
-        INNER JOIN datos d 
+        INNER JOIN datos d
             ON cv.customized_id = d.work_package_id
-        INNER JOIN custom_fields cf 
+        INNER JOIN custom_fields cf
             ON cf.id = cv.custom_field_id AND cf.name = d.estado
     )
     UPDATE custom_values cv
@@ -628,7 +628,7 @@ WHERE sm.id_operador = 1
     query9 = """
     UPDATE public.custom_values
     SET value = REPLACE(REPLACE(value, 'SI', '33'), 'NO', '34')
-    WHERE value IN ('SI', 'NO') 
+    WHERE value IN ('SI', 'NO')
     AND custom_field_id = 131;
     """
     query10 = """
@@ -639,28 +639,28 @@ WITH datos AS (
             'host=suc.insdosl.com port=5001 dbname=PRO user=insdo_backup password=1nSd0%24',
             '
                 WITH datos AS (
-                    SELECT 
-  num_suc, 
-  sm.miga, 
-  estado,  
+                    SELECT
+  num_suc,
+  sm.miga,
+  estado,
 
   COUNT(*) FILTER (
-    WHERE 
-      (sme.tipo_registro ILIKE ''%CR%'' OR 
-       (sme.tipo_registro ILIKE ''OTROS'' AND sme.observaciones LIKE ''%CR%'')) 
+    WHERE
+      (sme.tipo_registro ILIKE ''%CR%'' OR
+       (sme.tipo_registro ILIKE ''OTROS'' AND sme.observaciones LIKE ''%CR%''))
       AND uso <> ''0''
   ) AS num_CR,
 
   COUNT(*) FILTER (
-    WHERE 
-      (sme.tipo_registro ILIKE ''%CR%'' OR 
-       (sme.tipo_registro ILIKE ''OTROS'' AND sme.observaciones LIKE ''%CR%'')) 
+    WHERE
+      (sme.tipo_registro ILIKE ''%CR%'' OR
+       (sme.tipo_registro ILIKE ''OTROS'' AND sme.observaciones LIKE ''%CR%''))
       AND uso = ''0''
   ) AS num_CR0,
 
   COUNT(*) FILTER (
-    WHERE 
-      sme.tipo_registro ILIKE ''%Arq%'' OR 
+    WHERE
+      sme.tipo_registro ILIKE ''%Arq%'' OR
       (sme.tipo_registro ILIKE ''OTROS'' AND sme.observaciones NOT LIKE ''%CR%'')
   ) AS num_arq,
 
@@ -670,7 +670,7 @@ WITH datos AS (
 
   COUNT(*) FILTER (
     WHERE sme.tipo_registro ILIKE ''%POSTE%''
-  ) AS num_Poste, 
+  ) AS num_Poste,
 
   COUNT(*) FILTER (
     WHERE sme.tipo_registro ILIKE ''%CANAL%'' OR sme.tipo_registro IS NULL
@@ -678,9 +678,9 @@ WITH datos AS (
 
   COUNT(*) FILTER (
     WHERE NOT (
-      (sme.tipo_registro ILIKE ''%CR%'' OR 
+      (sme.tipo_registro ILIKE ''%CR%'' OR
        (sme.tipo_registro ILIKE ''OTROS'' AND sme.observaciones LIKE ''%CR%''))
-      OR (sme.tipo_registro ILIKE ''%Arq%'' OR 
+      OR (sme.tipo_registro ILIKE ''%Arq%'' OR
           (sme.tipo_registro ILIKE ''OTROS'' AND sme.observaciones NOT LIKE ''%CR%''))
       OR sme.tipo_registro ILIKE ''%ARM%''
       OR sme.tipo_registro ILIKE ''%POSTE%''
@@ -690,13 +690,13 @@ WITH datos AS (
   ) AS Pedestal,
 
   COUNT(*) AS total,
-  json_agg(tipo_registro) AS tipo_registro, 
+  json_agg(tipo_registro) AS tipo_registro,
   json_agg(uso) AS uso
 
-FROM escapex."SucMarco" sm 
-INNER JOIN escapex."SucMarcoElement" sme 
-  ON sm.id = sme.suc_marco_id 
-WHERE id_operador = 1 
+FROM escapex."SucMarco" sm
+INNER JOIN escapex."SucMarcoElement" sme
+  ON sm.id = sme.suc_marco_id
+WHERE id_operador = 1
 GROUP BY num_suc, sm.miga, estado
                 )
                 SELECT num_suc, ''Nª CR "USO-0"'' AS estado, num_cr0 AS fecha FROM datos
@@ -734,28 +734,28 @@ WITH datos AS (
             'host=suc.insdosl.com port=5001 dbname=PRO user=insdo_backup password=1nSd0%24',
             '
                 WITH datos AS (
-                    SELECT 
-  num_suc, 
-  sm.miga, 
-  estado,  
+                    SELECT
+  num_suc,
+  sm.miga,
+  estado,
 
   COUNT(*) FILTER (
-    WHERE 
-      (sme.tipo_registro ILIKE ''%CR%'' OR 
-       (sme.tipo_registro ILIKE ''OTROS'' AND sme.observaciones LIKE ''%CR%'')) 
+    WHERE
+      (sme.tipo_registro ILIKE ''%CR%'' OR
+       (sme.tipo_registro ILIKE ''OTROS'' AND sme.observaciones LIKE ''%CR%''))
       AND uso <> ''0''
   ) AS num_CR,
 
   COUNT(*) FILTER (
-    WHERE 
-      (sme.tipo_registro ILIKE ''%CR%'' OR 
-       (sme.tipo_registro ILIKE ''OTROS'' AND sme.observaciones LIKE ''%CR%'')) 
+    WHERE
+      (sme.tipo_registro ILIKE ''%CR%'' OR
+       (sme.tipo_registro ILIKE ''OTROS'' AND sme.observaciones LIKE ''%CR%''))
       AND uso = ''0''
   ) AS num_CR0,
 
   COUNT(*) FILTER (
-    WHERE 
-      sme.tipo_registro ILIKE ''%Arq%'' OR 
+    WHERE
+      sme.tipo_registro ILIKE ''%Arq%'' OR
       (sme.tipo_registro ILIKE ''OTROS'' AND sme.observaciones NOT LIKE ''%CR%'')
   ) AS num_arq,
 
@@ -765,7 +765,7 @@ WITH datos AS (
 
   COUNT(*) FILTER (
     WHERE sme.tipo_registro ILIKE ''%POSTE%''
-  ) AS num_Poste, 
+  ) AS num_Poste,
 
   COUNT(*) FILTER (
     WHERE sme.tipo_registro ILIKE ''%CANAL%'' OR sme.tipo_registro IS NULL
@@ -773,9 +773,9 @@ WITH datos AS (
 
   COUNT(*) FILTER (
     WHERE NOT (
-      (sme.tipo_registro ILIKE ''%CR%'' OR 
+      (sme.tipo_registro ILIKE ''%CR%'' OR
        (sme.tipo_registro ILIKE ''OTROS'' AND sme.observaciones LIKE ''%CR%''))
-      OR (sme.tipo_registro ILIKE ''%Arq%'' OR 
+      OR (sme.tipo_registro ILIKE ''%Arq%'' OR
           (sme.tipo_registro ILIKE ''OTROS'' AND sme.observaciones NOT LIKE ''%CR%''))
       OR sme.tipo_registro ILIKE ''%ARM%''
       OR sme.tipo_registro ILIKE ''%POSTE%''
@@ -785,13 +785,13 @@ WITH datos AS (
   ) AS Pedestal,
 
   COUNT(*) AS total,
-  json_agg(tipo_registro) AS tipo_registro, 
+  json_agg(tipo_registro) AS tipo_registro,
   json_agg(uso) AS uso
 
-FROM escapex."SucMarco" sm 
-INNER JOIN escapex."SucMarcoElement" sme 
-  ON sm.id = sme.suc_marco_id 
-WHERE id_operador = 1 
+FROM escapex."SucMarco" sm
+INNER JOIN escapex."SucMarcoElement" sme
+  ON sm.id = sme.suc_marco_id
+WHERE id_operador = 1
 GROUP BY num_suc, sm.miga, estado
                 )
                 SELECT num_suc, ''Nª CR "USO-0"'' AS estado, num_cr0 AS fecha FROM datos
@@ -842,6 +842,70 @@ WHERE
   AND wp.type_id = 9
   AND cf.name = 'PARTNER';
     """
+    query14 = """
+WITH
+-- 1. ID del campo 'FECHA POSIBLE ANULACIÓN'
+anulacion_field AS (
+  SELECT id AS custom_field_id_anulacion
+  FROM public.custom_fields
+  WHERE name = 'FECHA POSIBLE ANULACIÓN'
+),
+
+-- 2. Obtener el estado (nombre del campo que contiene la fecha base) por customized_id
+estado_nombre_por_customized AS (
+  SELECT customized_id, value AS estado_nombre
+  FROM public.custom_values
+  WHERE custom_field_id = 62
+),
+
+-- 3. Obtener el ID del campo que tiene el nombre igual al estado
+estado_field_id AS (
+  SELECT
+    en.customized_id,
+    en.estado_nombre,
+    cf.id AS fecha_base_custom_field_id
+  FROM estado_nombre_por_customized en
+  JOIN public.custom_fields cf ON cf.name = en.estado_nombre
+),
+
+-- 4. Obtener la fecha base (value del campo con nombre igual al estado)
+fecha_base AS (
+  SELECT
+    ef.customized_id,
+    ef.estado_nombre,
+    ef.fecha_base_custom_field_id,
+    cv.value::date AS fecha_base
+  FROM estado_field_id ef
+  JOIN public.custom_values cv
+    ON cv.customized_id = ef.customized_id AND cv.custom_field_id = ef.fecha_base_custom_field_id
+),
+
+-- 5. Obtener los días a sumar desde tabla estado
+fecha_con_dias AS (
+  SELECT
+    fb.customized_id,
+    fb.fecha_base,
+    e.diasum
+  FROM fecha_base fb
+  JOIN temp.estado e ON fb.estado_nombre = e.estado
+),
+
+-- 6. Obtener el ID del campo a actualizar ('FECHA POSIBLE ANULACIÓN')
+target AS (
+  SELECT
+    fcd.customized_id,
+    a.custom_field_id_anulacion,
+    TO_CHAR(fcd.fecha_base + fcd.diasum * INTERVAL '1 day', 'YYYY-MM-DD') AS nueva_fecha
+  FROM fecha_con_dias fcd
+  CROSS JOIN anulacion_field a
+)
+-- 7. Actualizar el campo con la nueva fecha
+UPDATE public.custom_values cv
+SET value = t.nueva_fecha
+FROM target t
+WHERE cv.customized_id = t.customized_id
+  AND cv.custom_field_id = t.custom_field_id_anulacion;
+    """
 
     # Ejecutar la consulta
     cursor.execute(query)
@@ -857,6 +921,7 @@ WHERE
     cursor.execute(query11)
     cursor.execute(query12)
     cursor.execute(query13)
+    cursor.execute(query14)
     # Confirmar la transacción
     connection.commit()
 

@@ -101,12 +101,12 @@ def clean_text(text):
 
 # Programar la ejecución diaria con APScheduler
 now = datetime.now()
-next_run_time = now.replace(hour=6, minute=0, second=0, microsecond=0)
+next_run_time = now.replace(hour=7, minute=30, second=0, microsecond=0)
 
 if now.hour >= 6:  # Si ya pasó hoy a las 6 AM, programar para mañana
     next_run_time += timedelta(days=1)
 
-next_run_time_3pm = now.replace(hour=15, minute=0, second=0, microsecond=0)
+next_run_time_3pm = now.replace(hour=15, minute=30, second=0, microsecond=0)
 
 if now.hour >= 15:  # Si ya pasó hoy a las 3 PM, programar para mañana
     next_run_time_3pm += timedelta(days=1)
@@ -286,8 +286,8 @@ async def get_all_tasks():
         conn = None
         # Conexión a PostgreSQL
         conn = psycopg2.connect(
-            host="suc.insdosl.com",
-            port="5433",
+            host="openproject_sucs_postgres",
+            port="5432",
             database="openproject",
             user="postgres",
             password="p4ssw0rd"
