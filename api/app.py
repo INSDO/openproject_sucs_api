@@ -13,6 +13,7 @@ import os
 import pandas as pd
 import psycopg2
 from requests.auth import HTTPBasicAuth
+import re
 
 # Configuración de logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -90,6 +91,12 @@ def matches_all_filters(wp, filters: Dict[str, List[str]]):
         if str(content) not in map(str, expected_values):
             return False
     return True
+
+def clean_text(text):
+    if isinstance(text, str):
+        # Reemplazar caracteres no imprimibles (como \u0002) por un espacio vacío o por otro carácter
+        return re.sub(r'[^\x20-\x7E]', '', text)  # Esto eliminará caracteres no ASCII imprimibles
+    return text
 
 
 # Programar la ejecución diaria con APScheduler
@@ -288,20 +295,35 @@ async def get_all_tasks():
 
         # Ejecutar la consulta
         query = "SELECT subject, custom_fields FROM public.vw_work_packages_custom"
+
         df = pd.read_sql(query, conn)
+
+        print("FETA QUERY")
 
         # Convertir la columna custom_fields (JSON) en columnas
         custom_df = df['custom_fields'].apply(
             lambda x: json.loads(x) if isinstance(x, str) and x else x
         ).apply(pd.Series)
 
+        print("SEPARAT PER CUSTOM_FIELDS")
+
+        # Limpiar los datos en custom_df (aplicar la limpieza de caracteres no válidos)
+        custom_df_cleaned = custom_df.applymap(clean_text)
+
+        # Limpiar la columna 'subject' también
+        df['subject'] = df['subject'].apply(clean_text)
+
         # Combinar con la columna subject
-        final_df = pd.concat([df['subject'], custom_df], axis=1)
+        final_df = pd.concat([df['subject'], custom_df_cleaned], axis=1)
+
+        print("1")
 
         # Guardar los datos en un archivo Excel temporal
         with tempfile.NamedTemporaryFile(delete=False, suffix=".xlsx") as tmp:
             final_df.to_excel(tmp.name, index=False, engine="openpyxl")
             tmp_path = tmp.name
+
+        print("GUARDAR EXC")
 
         # Enviar el archivo como respuesta
         return FileResponse(
@@ -309,7 +331,6 @@ async def get_all_tasks():
             filename="work_packages.xlsx",
             media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
-
 
     except psycopg2.OperationalError as e:
         raise HTTPException(status_code=500, detail=f"Error de conexión a la base de datos: {str(e)}")
