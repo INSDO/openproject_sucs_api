@@ -5,8 +5,8 @@ from psycopg2 import sql
 # Conexión a la base de datos PostgreSQL con los parámetros proporcionados
 try:
     connection = psycopg2.connect(
-        host="suc.insdosl.com",         # Host de la base de datos
-        port=5433,                      # Puerto de la base de datos
+        host="openproject_sucs_postgres",         # Host de la base de datos
+        port="5432",                      # Puerto de la base de datos
         dbname="openproject",           # Nombre de la base de datos
         user="postgres",                # Usuario de la base de datos
         password="p4ssw0rd"             # Contraseña de la base de datos
@@ -855,7 +855,7 @@ anulacion_field AS (
 estado_nombre_por_customized AS (
   SELECT customized_id, value AS estado_nombre
   FROM public.custom_values
-  WHERE custom_field_id = 62
+  WHERE custom_field_id = 136
 ),
 
 -- 3. Obtener el ID del campo que tiene el nombre igual al estado
@@ -906,6 +906,58 @@ FROM target t
 WHERE cv.customized_id = t.customized_id
   AND cv.custom_field_id = t.custom_field_id_anulacion;
     """
+    query15 = """
+INSERT INTO relations (from_id, to_id, relation_type)
+SELECT
+  wp9.id AS from_id,
+  wp8.id AS to_id,
+  'relates' AS relation_type
+FROM work_packages wp9
+JOIN custom_values cv90
+  ON wp9.id = cv90.customized_id
+  AND cv90.customized_type = 'WorkPackage'
+  AND cv90.custom_field_id = 90
+  AND cv90.value IS NOT NULL
+JOIN work_packages wp8
+  ON wp8.type_id = 8
+  AND wp8.subject = cv90.value
+WHERE wp9.type_id = 9
+  AND NOT EXISTS (
+    SELECT 1
+    FROM relations r
+    WHERE
+      (r.from_id = wp9.id AND r.to_id = wp8.id)
+      OR
+      (r.from_id = wp8.id AND r.to_id = wp9.id)
+  );
+    """
+
+    query16 = """
+INSERT INTO custom_values (customized_type, customized_id, custom_field_id, value)
+SELECT
+  'WorkPackage',
+  wp.id,
+  71,
+  NULL
+FROM work_packages wp
+LEFT JOIN custom_values cv
+  ON cv.customized_type = 'WorkPackage'
+  AND cv.customized_id = wp.id
+  AND cv.custom_field_id = 71
+WHERE wp.type_id = 8
+  AND cv.id IS NULL;
+    """
+    query17 = """
+UPDATE custom_values cv
+SET value = REGEXP_REPLACE(p.name, '\s*PETICIONES\s*', '', 'gi')
+FROM work_packages wp
+JOIN projects p ON wp.project_id = p.id
+WHERE cv.customized_type = 'WorkPackage'
+  AND cv.customized_id = wp.id
+  AND cv.custom_field_id = 71
+  AND wp.type_id = 8
+  AND (cv.value IS NULL OR cv.value = '');
+    """
 
     # Ejecutar la consulta
     cursor.execute(query)
@@ -922,6 +974,9 @@ WHERE cv.customized_id = t.customized_id
     cursor.execute(query12)
     cursor.execute(query13)
     cursor.execute(query14)
+    cursor.execute(query15)
+    cursor.execute(query16)
+    cursor.execute(query17)
     # Confirmar la transacción
     connection.commit()
 

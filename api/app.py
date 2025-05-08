@@ -1,6 +1,7 @@
 from fastapi import FastAPI, APIRouter, Depends, HTTPException, status
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.triggers.cron import CronTrigger
 from datetime import datetime, timedelta
 from typing import Dict, List
 from fastapi.responses import FileResponse
@@ -100,20 +101,8 @@ def clean_text(text):
 
 
 # Programar la ejecución diaria con APScheduler
-now = datetime.now()
-next_run_time = now.replace(hour=7, minute=30, second=0, microsecond=0)
-
-if now.hour >= 6:  # Si ya pasó hoy a las 6 AM, programar para mañana
-    next_run_time += timedelta(days=1)
-
-next_run_time_3pm = now.replace(hour=15, minute=30, second=0, microsecond=0)
-
-if now.hour >= 15:  # Si ya pasó hoy a las 3 PM, programar para mañana
-    next_run_time_3pm += timedelta(days=1)
-
-# Programar la ejecución diaria con intervalo de 24 horas
-scheduler.add_job(run_update, 'interval', days=1, next_run_time=next_run_time)
-scheduler.add_job(run_update, 'interval', days=1, next_run_time=next_run_time_3pm)
+scheduler.add_job(run_update, CronTrigger(hour=5, minute=30))
+scheduler.add_job(run_update, CronTrigger(hour=13, minute=30))
 scheduler.start()
 
 @api_router.get("/", dependencies=[Depends(verify_credentials)])
