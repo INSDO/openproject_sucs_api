@@ -149,8 +149,8 @@ WHERE cv.id = actualizar.custom_value_id;
                         CAST(sm.conductos_utilizados AS TEXT) AS conductos_utilizados,
                         CAST(COUNT(smc.longitud_cable_dm) AS TEXT) AS longitud_cable_dm,
                         CASE
-                            WHEN COUNT(*) FILTER (WHERE sme.tipo_registro ILIKE ''%POSTE%'') > 0 THEN ''SI''
-                            ELSE ''NO''
+                            WHEN COUNT(*) FILTER (WHERE sme.tipo_registro ILIKE ''%POSTE%'') > 0 THEN ''33''
+                            ELSE ''34''
                         END AS tiene_poste
                     FROM escapex."SucMarco" sm
                     INNER JOIN escapex."SucMarcoElement" sme
@@ -204,8 +204,8 @@ WHERE cv.id = actualizar.custom_value_id;
                         CAST(sm.conductos_utilizados AS TEXT) AS conductos_utilizados,
                         CAST(COUNT(smc.longitud_cable_dm) AS TEXT) AS longitud_cable_dm,
                         CASE
-                            WHEN COUNT(*) FILTER (WHERE sme.tipo_registro ILIKE ''%POSTE%'') > 0 THEN ''SI''
-                            ELSE ''NO''
+                            WHEN COUNT(*) FILTER (WHERE sme.tipo_registro ILIKE ''%POSTE%'') > 0 THEN ''33''
+                            ELSE ''34''
                         END AS tiene_poste
                     FROM escapex."SucMarco" sm
                     INNER JOIN escapex."SucMarcoElement" sme
@@ -947,7 +947,8 @@ LEFT JOIN custom_values cv
 WHERE wp.type_id = 8
   AND cv.id IS NULL;
     """
-    query17 = """
+
+    query17 = r"""
 UPDATE custom_values cv
 SET value = REGEXP_REPLACE(p.name, '\s*PETICIONES\s*', '', 'gi')
 FROM work_packages wp
@@ -958,6 +959,61 @@ WHERE cv.customized_type = 'WorkPackage'
   AND wp.type_id = 8
   AND (cv.value IS NULL OR cv.value = '');
     """
+
+    query18 = """
+INSERT INTO custom_values (customized_type, customized_id, custom_field_id, value)
+SELECT 'WorkPackage', wp.id, 139, NULL
+FROM work_packages wp
+WHERE wp.type_id = 8
+  AND NOT EXISTS (
+    SELECT 1 FROM custom_values cv
+    WHERE cv.customized_type = 'WorkPackage'
+      AND cv.customized_id = wp.id
+      AND cv.custom_field_id = 139
+  );
+    """
+
+    query19 = """
+UPDATE custom_values cv139
+SET value = sub.new_value
+FROM (
+  SELECT
+    wp.id AS wp_id,
+    CASE
+      WHEN cv85.value IS NOT NULL AND cv10.value IS NULL THEN '57'
+      WHEN cv10.value IS NOT NULL AND cv85.value IS NULL THEN '56'
+      WHEN cv85.value IS NULL AND cv10.value IS NULL THEN '93'
+      ELSE '58'  -- caso imposible, lo puedes controlar con un SELECT previo si quieres
+    END AS new_value
+  FROM work_packages wp
+  LEFT JOIN custom_values cv85
+    ON cv85.customized_id = wp.id AND cv85.customized_type = 'WorkPackage' AND cv85.custom_field_id = 85
+  LEFT JOIN custom_values cv10
+    ON cv10.customized_id = wp.id AND cv10.customized_type = 'WorkPackage' AND cv10.custom_field_id = 10
+  WHERE wp.type_id = 8
+) AS sub
+WHERE cv139.customized_id = sub.wp_id
+  AND cv139.customized_type = 'WorkPackage'
+  AND cv139.custom_field_id = 139;
+    """
+
+    query20 = """
+UPDATE work_packages wp8
+SET project_id = parent_projects.parent_id
+FROM work_packages wp9
+JOIN custom_values cv ON cv.customized_type = 'WorkPackage'
+                     AND cv.customized_id = wp9.id
+                     AND cv.custom_field_id = 90
+                     AND cv.value IS NOT NULL
+JOIN work_packages wp_target ON wp_target.type_id = 8
+                            AND wp_target.subject = cv.value
+JOIN relations r ON r.from_id = wp9.id AND r.to_id = wp_target.id
+JOIN projects p9 ON p9.id = wp9.project_id
+JOIN projects parent_projects ON parent_projects.id = p9.parent_id
+WHERE wp8.id = wp_target.id
+  AND wp9.type_id = 9;
+    """
+
 
     # Ejecutar la consulta
     cursor.execute(query)
@@ -977,6 +1033,9 @@ WHERE cv.customized_type = 'WorkPackage'
     cursor.execute(query15)
     cursor.execute(query16)
     cursor.execute(query17)
+    cursor.execute(query18)
+    cursor.execute(query19)
+    cursor.execute(query20)
     # Confirmar la transacción
     connection.commit()
 
