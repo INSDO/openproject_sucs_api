@@ -400,6 +400,16 @@ WHERE sm.id_operador = 1
 
                 UNION ALL
 
+                SELECT CAST(num_suc AS TEXT) AS num_suc, ''Nª ARM'' AS estado,
+                    CAST(COUNT(*) FILTER (WHERE sme.tipo_registro ILIKE ''%ARM%'') AS TEXT) AS fecha
+                FROM escapex."SucMarco" sm
+                INNER JOIN escapex."SucMarcoElement" sme
+                    ON sm.id = sme.suc_marco_id
+                WHERE id_operador = 1
+                GROUP BY num_suc
+
+                UNION ALL
+
                 SELECT CAST(num_suc AS TEXT) AS num_suc, ''Nª POSTES'' AS estado,
                     CAST(COUNT(*) FILTER (WHERE sme.tipo_registro ILIKE ''%POSTE%'') AS TEXT) AS fecha
                 FROM escapex."SucMarco" sm
@@ -580,6 +590,16 @@ WHERE sm.id_operador = 1
 
                 SELECT CAST(num_suc AS TEXT) AS num_suc, ''Nª ARQ'' AS estado,
                     CAST(COUNT(*) FILTER (WHERE sme.tipo_registro ILIKE ''%Arq%'' OR (sme.tipo_registro ILIKE ''OTROS'' AND sme.observaciones NOT LIKE ''%CR%'')) AS TEXT) AS fecha
+                FROM escapex."SucMarco" sm
+                INNER JOIN escapex."SucMarcoElement" sme
+                    ON sm.id = sme.suc_marco_id
+                WHERE id_operador = 1
+                GROUP BY num_suc
+                
+                UNION ALL
+
+                SELECT CAST(num_suc AS TEXT) AS num_suc, ''Nª ARM'' AS estado,
+                    CAST(COUNT(*) FILTER (WHERE sme.tipo_registro ILIKE ''%ARM%'') AS TEXT) AS fecha
                 FROM escapex."SucMarco" sm
                 INNER JOIN escapex."SucMarcoElement" sme
                     ON sm.id = sme.suc_marco_id
@@ -999,7 +1019,7 @@ WHERE cv139.customized_id = sub.wp_id
 
     query20 = """
 UPDATE work_packages wp8
-SET project_id = parent_projects.parent_id
+SET project_id = parent_projects.id
 FROM work_packages wp9
 JOIN custom_values cv ON cv.customized_type = 'WorkPackage'
                      AND cv.customized_id = wp9.id
